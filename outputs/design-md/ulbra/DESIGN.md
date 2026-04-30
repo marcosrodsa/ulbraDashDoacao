@@ -240,6 +240,330 @@ ULBRA's palette is _institutional-first, not marketing-bright_. The dark teal (#
 
 ---
 
+## 2.5 CSS Custom Properties (Design Tokens)
+
+All ULBRA design elements are codified as CSS custom properties (CSS variables) for consistent, maintainable component implementation. Define these tokens in your stylesheet (e.g., `:root { ... }` or a dedicated `tokens.css` file) and reference them throughout your components.
+
+### Token Definition Reference
+
+```css
+/* ========================================
+   ULBRA Design System — CSS Custom Properties
+   ======================================== */
+
+/* ========== COLOR TOKENS ========== */
+
+/* Primary Brand Colors */
+--ulbra-color-primary: #0d3634;
+--ulbra-color-primary-dark: #062926;
+--ulbra-color-primary-light: #1a5450;
+
+/* Secondary Brand Colors */
+--ulbra-color-secondary: #045a52;
+--ulbra-color-secondary-dark: #03423a;
+--ulbra-color-secondary-light: #0d7366;
+
+/* Accent Colors */
+--ulbra-color-accent-tan: #cca269;
+--ulbra-color-accent-sand: #f5ce99;
+--ulbra-color-accent-sage: #91baa3;
+--ulbra-color-accent-brown: #66563d;
+
+/* Semantic Colors */
+--ulbra-color-success: #28a745;
+--ulbra-color-success-dark: #218838;
+--ulbra-color-danger: #dc3545;
+--ulbra-color-danger-dark: #bd2130;
+--ulbra-color-warning: #ffc107;
+--ulbra-color-warning-dark: #ffb100;
+--ulbra-color-info: #17a2b8;
+--ulbra-color-info-dark: #138496;
+
+/* Neutral Scale */
+--ulbra-color-text-primary: #212529;
+--ulbra-color-text-secondary: #6c757d;
+--ulbra-color-text-muted: #6c757d;
+--ulbra-color-text-label: #495057;
+
+/* Surface & Borders */
+--ulbra-color-surface: #ffffff;
+--ulbra-color-surface-light: #f8f9fa;
+--ulbra-color-surface-lighter: #e9ecef;
+--ulbra-color-border: #dee2e6;
+--ulbra-color-border-light: #b8c0c8;
+--ulbra-color-border-input: #ced4da;
+--ulbra-color-border-input-focus: #80bdff;
+
+/* ========== TYPOGRAPHY TOKENS ========== */
+
+/* Font Family */
+--ulbra-font-family-inter: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+--ulbra-font-family-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+/* Display Styles (6rem – 3.5rem) */
+--ulbra-font-display-hero-size: 6rem;
+--ulbra-font-display-hero-weight: 300;
+--ulbra-font-display-hero-line-height: 1.2;
+
+--ulbra-font-display-large-size: 5.5rem;
+--ulbra-font-display-large-weight: 300;
+--ulbra-font-display-large-line-height: 1.2;
+
+--ulbra-font-display-large2-size: 4.5rem;
+--ulbra-font-display-large2-weight: 300;
+--ulbra-font-display-large2-line-height: 1.2;
+
+--ulbra-font-display-medium-size: 3.5rem;
+--ulbra-font-display-medium-weight: 300;
+--ulbra-font-display-medium-line-height: 1.2;
+
+/* Heading Styles (h1–h3) */
+--ulbra-font-heading-xl-size: 2.5rem;
+--ulbra-font-heading-xl-weight: 500;
+--ulbra-font-heading-xl-line-height: 1.2;
+
+--ulbra-font-heading-lg-size: 2rem;
+--ulbra-font-heading-lg-weight: 500;
+--ulbra-font-heading-lg-line-height: 1.2;
+
+--ulbra-font-heading-md-size: 1.75rem;
+--ulbra-font-heading-md-weight: 500;
+--ulbra-font-heading-md-line-height: 1.2;
+
+/* Body Styles */
+--ulbra-font-body-lg-size: 1.25rem;
+--ulbra-font-body-lg-weight: 300;
+--ulbra-font-body-lg-line-height: 1.5;
+
+--ulbra-font-body-md-size: 1rem;
+--ulbra-font-body-md-weight: 400;
+--ulbra-font-body-md-line-height: 1.5;
+
+--ulbra-font-body-sm-size: 0.875rem;
+--ulbra-font-body-sm-weight: 400;
+--ulbra-font-body-sm-line-height: 1.5;
+
+/* Special Styles */
+--ulbra-font-button-size: 1rem;
+--ulbra-font-button-weight: 400;
+--ulbra-font-button-line-height: 1.5;
+
+--ulbra-font-label-size: 0.875rem;
+--ulbra-font-label-weight: 400;
+--ulbra-font-label-line-height: 1.5;
+
+/* ========== SPACING TOKENS ========== */
+
+--ulbra-spacing-xs: 0.25rem;  /* 4px */
+--ulbra-spacing-sm: 0.5rem;   /* 8px */
+--ulbra-spacing-md: 1rem;     /* 16px */
+--ulbra-spacing-lg: 1.5rem;   /* 24px */
+--ulbra-spacing-xl: 2rem;     /* 32px */
+--ulbra-spacing-xxl: 4rem;    /* 64px */
+
+/* ========== BORDER RADIUS TOKENS ========== */
+
+--ulbra-radius-none: 0px;
+--ulbra-radius-sm: 0.2rem;     /* 3px */
+--ulbra-radius-md: 0.25rem;    /* 4px */
+--ulbra-radius-lg: 0.5rem;     /* 8px */
+--ulbra-radius-xl: 1rem;       /* 16px */
+
+/* ========== BREAKPOINT TOKENS ========== */
+
+--ulbra-breakpoint-xs: 0px;
+--ulbra-breakpoint-sm: 576px;
+--ulbra-breakpoint-md: 768px;
+--ulbra-breakpoint-lg: 992px;
+--ulbra-breakpoint-xl: 1200px;
+
+/* ========== SHADOW TOKENS ========== */
+
+--ulbra-shadow-none: none;
+--ulbra-shadow-focus: 0 0 0 0.2rem rgba(13, 54, 52, 0.25);
+
+/* ========== COMPONENT TOKENS ========== */
+
+/* Button Base */
+--ulbra-button-padding-sm: 0.375rem 0.5rem;
+--ulbra-button-padding-md: 0.375rem 0.75rem;
+--ulbra-button-padding-lg: 0.5rem 1rem;
+--ulbra-button-radius: 0.25rem;
+--ulbra-button-font-size: 1rem;
+--ulbra-button-font-weight: 400;
+--ulbra-button-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+--ulbra-button-line-height: 1.5;
+
+/* Button Primary (Teal) */
+--ulbra-button-primary-bg: #0d3634;
+--ulbra-button-primary-text: #ffffff;
+--ulbra-button-primary-border: #0d3634;
+--ulbra-button-primary-hover-bg: #062926;
+--ulbra-button-primary-active-bg: #051f1d;
+--ulbra-button-primary-focus-shadow: 0 0 0 0.2rem rgba(13, 54, 52, 0.25);
+
+/* Button Secondary (Gray) */
+--ulbra-button-secondary-bg: #6c757d;
+--ulbra-button-secondary-text: #ffffff;
+--ulbra-button-secondary-border: #6c757d;
+--ulbra-button-secondary-hover-bg: #5a6268;
+--ulbra-button-secondary-active-bg: #545b62;
+--ulbra-button-secondary-focus-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25);
+
+/* Button Success (Green) */
+--ulbra-button-success-bg: #28a745;
+--ulbra-button-success-text: #ffffff;
+--ulbra-button-success-border: #28a745;
+--ulbra-button-success-hover-bg: #218838;
+--ulbra-button-success-active-bg: #1e7e34;
+--ulbra-button-success-focus-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+
+/* Button Danger (Red) */
+--ulbra-button-danger-bg: #dc3545;
+--ulbra-button-danger-text: #ffffff;
+--ulbra-button-danger-border: #dc3545;
+--ulbra-button-danger-hover-bg: #bd2130;
+--ulbra-button-danger-active-bg: #a71d2a;
+--ulbra-button-danger-focus-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+
+/* Input / Form Field */
+--ulbra-input-padding-sm: 0.25rem 0.5rem;
+--ulbra-input-padding-md: 0.375rem 0.75rem;
+--ulbra-input-padding-lg: 0.5rem 1rem;
+--ulbra-input-radius: 0.25rem;
+--ulbra-input-bg: #ffffff;
+--ulbra-input-text-color: #495057;
+--ulbra-input-border: 1px solid #ced4da;
+--ulbra-input-border-focus: 1px solid #80bdff;
+--ulbra-input-focus-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+--ulbra-input-placeholder-color: #6c757d;
+--ulbra-input-disabled-bg: #e9ecef;
+--ulbra-input-disabled-color: #6c757d;
+
+/* Card / Container */
+--ulbra-card-bg: #ffffff;
+--ulbra-card-border: 1px solid #dee2e6;
+--ulbra-card-radius: 0.25rem;
+--ulbra-card-padding: 1rem;
+--ulbra-card-shadow: none;
+
+/* Container Layout */
+--ulbra-container-max-width: 1140px;
+--ulbra-container-gutter: 15px;
+
+/* Navigation */
+--ulbra-nav-bg: #ffffff;
+--ulbra-nav-text: #212529;
+--ulbra-nav-border: 1px solid #dee2e6;
+--ulbra-nav-height: 60px;
+--ulbra-nav-link-color: #007bff;
+--ulbra-nav-link-hover-color: #0056b3;
+
+/* Badge / Pill */
+--ulbra-badge-padding: 0.25rem 0.4rem;
+--ulbra-badge-radius: 0.25rem;
+--ulbra-badge-font-size: 0.875rem;
+--ulbra-badge-font-weight: 400;
+--ulbra-badge-line-height: 1.5;
+--ulbra-badge-primary-bg: #0d3634;
+--ulbra-badge-primary-text: #ffffff;
+--ulbra-badge-default-bg: #ffffff;
+--ulbra-badge-default-text: #212529;
+--ulbra-badge-default-border: 1px solid #dee2e6;
+
+/* Table */
+--ulbra-table-header-bg: #e9ecef;
+--ulbra-table-header-text: #495057;
+--ulbra-table-body-bg: #ffffff;
+--ulbra-table-border: 1px solid #dee2e6;
+--ulbra-table-striped-bg: rgba(0, 0, 0, 0.05);
+--ulbra-table-cell-padding: 0.75rem;
+```
+
+### Usage Example
+
+Apply these tokens to your component implementations. Example using CSS:
+
+```css
+/* Define tokens at root level */
+:root {
+  --ulbra-color-primary: #0d3634;
+  --ulbra-color-primary-dark: #062926;
+  --ulbra-font-body-md-size: 1rem;
+  --ulbra-spacing-md: 1rem;
+  /* ...other tokens... */
+}
+
+/* Use tokens in component styles */
+.btn-primary {
+  background-color: var(--ulbra-color-primary);
+  color: #ffffff;
+  padding: var(--ulbra-button-padding-md);
+  border-radius: var(--ulbra-radius-md);
+  font-size: var(--ulbra-button-font-size);
+  font-weight: var(--ulbra-button-font-weight);
+  border: 1px solid var(--ulbra-color-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--ulbra-color-primary-dark);
+}
+
+.btn-primary:focus {
+  box-shadow: var(--ulbra-shadow-focus);
+}
+
+.card {
+  background-color: var(--ulbra-card-bg);
+  border: var(--ulbra-card-border);
+  border-radius: var(--ulbra-card-radius);
+  padding: var(--ulbra-card-padding);
+}
+
+.input-text {
+  background-color: var(--ulbra-input-bg);
+  color: var(--ulbra-input-text-color);
+  border: var(--ulbra-input-border);
+  padding: var(--ulbra-input-padding-md);
+  border-radius: var(--ulbra-input-radius);
+}
+
+.input-text:focus {
+  border-color: var(--ulbra-input-border-focus);
+  box-shadow: var(--ulbra-input-focus-shadow);
+}
+
+body {
+  font-family: var(--ulbra-font-family-inter);
+  font-size: var(--ulbra-font-body-md-size);
+  font-weight: var(--ulbra-font-body-md-weight);
+  line-height: var(--ulbra-font-body-md-line-height);
+  color: var(--ulbra-color-text-primary);
+}
+
+h1 {
+  font-size: var(--ulbra-font-heading-xl-size);
+  font-weight: var(--ulbra-font-heading-xl-weight);
+  line-height: var(--ulbra-font-heading-xl-line-height);
+  color: var(--ulbra-color-text-primary);
+}
+```
+
+### Token Naming Convention
+
+- **Prefix**: `--ulbra-` ensures namespace isolation
+- **Category**: `color`, `font`, `spacing`, `radius`, `breakpoint`, `shadow`, `button`, `input`, `card`, `nav`, `badge`, `table`
+- **Property**: Describes the token (e.g., `primary`, `text-color`, `hover-bg`)
+- **Variant**: State or size modifier (e.g., `-dark`, `-hover`, `-focus`)
+
+**Example paths**:
+- `--ulbra-color-primary` (brand teal)
+- `--ulbra-button-primary-hover-bg` (primary button hover background)
+- `--ulbra-font-heading-xl-size` (extra-large heading size)
+- `--ulbra-spacing-md` (medium spacing)
+
+---
+
 ## 3. Typography Rules
 
 ### Font Family
