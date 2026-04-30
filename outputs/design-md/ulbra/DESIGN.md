@@ -339,6 +339,26 @@ ULBRA's palette is _institutional-first, not marketing-bright_. The dark teal (#
 - Box-shadow: `0 0 0 0.2rem rgba(13, 54, 52, 0.25)` (teal glow for primary; color-adjusted for other variants)
 - Outline: None (rely on shadow for focus indicator to meet WCAG AA)
 
+#### Button States — Complete Reference
+
+| State | Primary Teal | Secondary Gray | Success | Danger |
+|-------|--------------|----------------|---------|--------|
+| **Default** | bg: `#0d3634` | bg: `#6c757d` | bg: `#28a745` | bg: `#dc3545` |
+| **Hover** | bg: `#062926` | bg: `#5a6268` | bg: `#218838` | bg: `#bd2130` |
+| **Active** | bg: `#051f1d` | bg: `#545b62` | bg: `#1e7e34` | bg: `#a71d2a` |
+| **Disabled** | bg: `#b3b3b3`, cursor: not-allowed, opacity: 0.65 | bg: `#b3b3b3`, cursor: not-allowed, opacity: 0.65 | bg: `#b3b3b3`, cursor: not-allowed, opacity: 0.65 | bg: `#b3b3b3`, cursor: not-allowed, opacity: 0.65 |
+| **Focus** | box-shadow: `0 0 0 0.2rem rgba(13, 54, 52, 0.25)` | box-shadow: `0 0 0 0.2rem rgba(108, 117, 125, 0.25)` | box-shadow: `0 0 0 0.2rem rgba(40, 167, 69, 0.25)` | box-shadow: `0 0 0 0.2rem rgba(220, 53, 69, 0.25)` |
+
+All button variants share: `text: #ffffff`, `border: same as background`, `radius: 0.25rem`, `padding: 0.375rem 0.75rem`, `font: 1rem Inter weight 400`.
+
+#### Button Sizes
+
+| Size | Padding | Font Size | Line Height | Use Case |
+|------|---------|-----------|-------------|----------|
+| **sm** | 0.375rem 0.5rem | 0.875rem | 1.5 | Compact inline actions, secondary controls |
+| **md** | 0.375rem 0.75rem | 1rem | 1.5 | Default button size, primary CTAs |
+| **lg** | 0.5rem 1rem | 1.125rem | 1.5 | Hero CTAs, prominent actions |
+
 ### Cards & Containers
 
 **Card / Section Panel** (`card`)
@@ -367,6 +387,26 @@ ULBRA's palette is _institutional-first, not marketing-bright_. The dark teal (#
 - Opacity: 1 (no transparency fade; clear visual disabled state)
 - Cursor: not-allowed
 
+#### Input States — Complete Reference
+
+| State | Background | Border | Box-Shadow | Text Color | Use |
+|-------|-----------|--------|-----------|-----------|-----|
+| **Default** | `#ffffff` | 1px solid `#ced4da` | none | `#495057` | Standard input field |
+| **Hover** | `#ffffff` | 1px solid `#b8c0c8` | none | `#495057` | Visual feedback on hover |
+| **Focus** | `#ffffff` | 1px solid `#80bdff` | `0 0 0 0.2rem rgba(0, 123, 255, 0.25)` | `#495057` | Keyboard or click focus |
+| **Disabled** | `#e9ecef` | 1px solid `#dee2e6` | none | `#6c757d` | Disabled state, non-editable |
+| **Error** | `#fff5f5` | 1px solid `#dc3545` | `0 0 0 0.2rem rgba(220, 53, 69, 0.25)` | `#495057` | Validation failure |
+
+All input variants share: `radius: 0.25rem`, `padding: 0.375rem 0.75rem`, `font: 1rem Inter weight 400`, `placeholder: #6c757d`.
+
+#### Input Sizes
+
+| Size | Padding | Font Size | Height | Use Case |
+|------|---------|-----------|--------|----------|
+| **sm** | 0.25rem 0.5rem | 0.875rem | ~32px | Compact forms, inline editing |
+| **md** | 0.375rem 0.75rem | 1rem | ~40px | Standard form fields |
+| **lg** | 0.5rem 1rem | 1.125rem | ~48px | Prominent input, mobile-optimized |
+
 ### Badges / Tags / Pills
 
 **Default Badge** (`badge-default`)
@@ -383,6 +423,24 @@ ULBRA's palette is _institutional-first, not marketing-bright_. The dark teal (#
 - Text: `#ffffff`
 - Border: None
 - Use: Active states, featured tags.
+
+#### Badge States — Complete Reference
+
+| State | Default | Primary | Success | Danger | Warning | Info |
+|-------|---------|---------|---------|--------|---------|------|
+| **Default** | bg: `#ffffff`, border: 1px `#dee2e6`, text: `#212529` | bg: `#0d3634`, text: `#ffffff` | bg: `#28a745`, text: `#ffffff` | bg: `#dc3545`, text: `#ffffff` | bg: `#ffc107`, text: `#212529` | bg: `#17a2b8`, text: `#ffffff` |
+| **Hover** | border: `#b8c0c8` | bg: `#062926` | bg: `#218838` | bg: `#bd2130` | bg: `#ffb100` | bg: `#138496` |
+| **Disabled** | opacity: 0.65, cursor: not-allowed | opacity: 0.65, cursor: not-allowed | opacity: 0.65, cursor: not-allowed | opacity: 0.65, cursor: not-allowed | opacity: 0.65, cursor: not-allowed | opacity: 0.65, cursor: not-allowed |
+
+All badge variants share: `radius: 0.25rem`, `font: 0.875rem Inter weight 400`, `line-height: 1.5`.
+
+#### Badge Sizes
+
+| Size | Padding | Font Size | Use Case |
+|------|---------|-----------|----------|
+| **xs** | 0.2rem 0.3rem | 0.75rem | Tiny labels, micro-tags |
+| **sm** | 0.25rem 0.4rem | 0.875rem | Default badge size, inline tags |
+| **md** | 0.375rem 0.5rem | 1rem | Larger badges, pill-style tags |
 
 ### Navigation
 
