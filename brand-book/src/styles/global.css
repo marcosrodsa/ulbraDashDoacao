@@ -1,21 +1,381 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/**
+ * ULBRA Design System - Global Styles
+ *
+ * Includes:
+ * - CSS custom properties (tokens) exposed from TypeScript definitions
+ * - Global resets and base styles
+ * - Font imports
+ * - Base element styling
+ */
 
-* {
+/* Import Inter variable font (100–900 weights) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* ========================================
+   CSS CUSTOM PROPERTIES (Design Tokens)
+   ======================================== */
+
+:root {
+  /* Primary Colors */
+  --ulbra-color-primary: #0d3634;
+  --ulbra-color-primary-hover: #062926;
+  --ulbra-color-primary-active: #051f1d;
+
+  /* Secondary Colors */
+  --ulbra-color-secondary: #045a52;
+  --ulbra-color-secondary-hover: #033f38;
+  --ulbra-color-secondary-active: #022e2a;
+
+  /* Tertiary/Accent Colors */
+  --ulbra-color-tertiary: #cca269;
+  --ulbra-color-tertiary-hover: #b8935e;
+  --ulbra-color-tertiary-active: #a37e53;
+
+  /* Semantic Colors */
+  --ulbra-color-success: #28a745;
+  --ulbra-color-success-hover: #218838;
+  --ulbra-color-error: #dc3545;
+  --ulbra-color-error-hover: #bd2130;
+  --ulbra-color-warning: #ffc107;
+  --ulbra-color-warning-hover: #e0a800;
+  --ulbra-color-info: #007bff;
+  --ulbra-color-info-hover: #0056b3;
+
+  /* Neutral/Grayscale */
+  --ulbra-color-neutral: #6c757d;
+  --ulbra-color-neutral-hover: #5a6268;
+  --ulbra-color-neutral-light: #e2e3e5;
+  --ulbra-color-neutral-lighter: #f1f3f5;
+
+  /* Text & Surface */
+  --ulbra-color-text: #212529;
+  --ulbra-color-text-muted: #6c757d;
+  --ulbra-color-text-light: #495057;
+  --ulbra-color-surface: #ffffff;
+  --ulbra-color-surface-dark: #f8f9fa;
+
+  /* Borders */
+  --ulbra-color-border: #dee2e6;
+  --ulbra-color-border-light: #e9ecef;
+
+  /* Additional Brand Palette */
+  --ulbra-color-light-sand: #f5ce99;
+  --ulbra-color-brown: #66563d;
+  --ulbra-color-sage: #91baa3;
+
+  /* Component-Specific Colors */
+  --ulbra-color-card-bg: #ffffff;
+  --ulbra-color-input-bg: #ffffff;
+  --ulbra-color-input-border: #ced4da;
+  --ulbra-color-input-focus-border: #80bdff;
+  --ulbra-color-button-secondary-bg: #6c757d;
+  --ulbra-color-disabled: #b3b3b3;
+  --ulbra-color-disabled-bg: #e9ecef;
+  --ulbra-color-disabled-text: #6c757d;
+
+  /* Typography - Font Families */
+  --ulbra-font-family-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --ulbra-font-family-mono: "Fira Code", "Courier New", monospace;
+
+  /* Typography - Font Sizes */
+  --ulbra-font-size-display-hero: 6rem;
+  --ulbra-font-size-display-large: 5.5rem;
+  --ulbra-font-size-display-medium: 3.5rem;
+  --ulbra-font-size-heading-xl: 2rem;
+  --ulbra-font-size-heading-l: 1.75rem;
+  --ulbra-font-size-heading-m: 1.5rem;
+  --ulbra-font-size-body-large: 1.25rem;
+  --ulbra-font-size-body: 1rem;
+  --ulbra-font-size-body-small: 0.875rem;
+  --ulbra-font-size-caption: 0.875rem;
+
+  /* Typography - Font Weights */
+  --ulbra-font-weight-light: 300;
+  --ulbra-font-weight-normal: 400;
+  --ulbra-font-weight-medium: 500;
+  --ulbra-font-weight-semibold: 600;
+  --ulbra-font-weight-bold: 700;
+
+  /* Typography - Line Heights */
+  --ulbra-line-height-display: 1.2;
+  --ulbra-line-height-body: 1.5;
+  --ulbra-line-height-tight: 1.2;
+  --ulbra-line-height-normal: 1.5;
+
+  /* Spacing Scale */
+  --ulbra-spacing-xs: 0.25rem;
+  --ulbra-spacing-sm: 0.5rem;
+  --ulbra-spacing-md: 1rem;
+  --ulbra-spacing-lg: 1.5rem;
+  --ulbra-spacing-xl: 2rem;
+  --ulbra-spacing-xxl: 4rem;
+
+  /* Border Radius */
+  --ulbra-radius-none: 0px;
+  --ulbra-radius-sm: 0.2rem;
+  --ulbra-radius-md: 0.25rem;
+  --ulbra-radius-lg: 0.5rem;
+  --ulbra-radius-xl: 1rem;
+  --ulbra-radius-full: 9999px;
+
+  /* Breakpoints (for reference in media queries) */
+  --ulbra-breakpoint-xs: 0px;
+  --ulbra-breakpoint-sm: 576px;
+  --ulbra-breakpoint-md: 768px;
+  --ulbra-breakpoint-lg: 992px;
+  --ulbra-breakpoint-xl: 1200px;
+  --ulbra-breakpoint-xxl: 1400px;
+
+  /* Container Max-Widths */
+  --ulbra-container-max-width-sm: 540px;
+  --ulbra-container-max-width-md: 720px;
+  --ulbra-container-max-width-lg: 960px;
+  --ulbra-container-max-width-xl: 1140px;
+  --ulbra-container-max-width-xxl: 1320px;
+
+  /* Shadows */
+  --ulbra-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --ulbra-shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --ulbra-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+
+  /* Focus ring (for keyboard navigation) */
+  --ulbra-focus-ring: 0 0 0 0.2rem rgba(13, 54, 52, 0.25);
+}
+
+/* ========================================
+   GLOBAL RESET & BASE STYLES
+   ======================================== */
+
+/* Box model reset */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html,
-body {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #000000;
-  background-color: #ffffff;
+/* Root HTML element */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%; /* Prevent iOS font scaling */
 }
 
+/* Body and typography base */
 body {
-  -webkit-font-smoothing: antialiased;
+  font-family: var(--ulbra-font-family-sans);
+  font-size: var(--ulbra-font-size-body);
+  font-weight: var(--ulbra-font-weight-normal);
+  line-height: var(--ulbra-line-height-body);
+  color: var(--ulbra-color-text);
+  background-color: var(--ulbra-color-surface);
+  -webkit-font-smoothing: antialiased; /* Better font rendering */
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--ulbra-font-weight-medium);
+  line-height: var(--ulbra-line-height-display);
+  margin-bottom: var(--ulbra-spacing-md);
+  color: var(--ulbra-color-text);
+}
+
+h1 {
+  font-size: var(--ulbra-font-size-display-large);
+  font-weight: var(--ulbra-font-weight-light);
+}
+
+h2 {
+  font-size: var(--ulbra-font-size-heading-xl);
+}
+
+h3 {
+  font-size: var(--ulbra-font-size-heading-l);
+}
+
+h4 {
+  font-size: var(--ulbra-font-size-heading-m);
+}
+
+h5 {
+  font-size: var(--ulbra-font-size-body-large);
+}
+
+h6 {
+  font-size: var(--ulbra-font-size-body);
+}
+
+/* Paragraphs and text blocks */
+p {
+  margin-bottom: var(--ulbra-spacing-md);
+}
+
+small,
+.text-small {
+  font-size: var(--ulbra-font-size-body-small);
+}
+
+/* Links */
+a {
+  color: var(--ulbra-color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--ulbra-color-primary-hover);
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: none;
+  box-shadow: var(--ulbra-focus-ring);
+  border-radius: var(--ulbra-radius-sm);
+}
+
+/* Lists */
+ul,
+ol {
+  margin-bottom: var(--ulbra-spacing-md);
+  margin-left: var(--ulbra-spacing-lg);
+}
+
+li {
+  margin-bottom: var(--ulbra-spacing-sm);
+}
+
+/* Code elements */
+code,
+pre {
+  font-family: var(--ulbra-font-family-mono);
+  background-color: var(--ulbra-color-surface-dark);
+  border-radius: var(--ulbra-radius-sm);
+}
+
+code {
+  padding: var(--ulbra-spacing-xs) var(--ulbra-spacing-sm);
+}
+
+pre {
+  padding: var(--ulbra-spacing-md);
+  overflow-x: auto;
+  margin-bottom: var(--ulbra-spacing-md);
+}
+
+/* Form elements base */
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* Input and textarea */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+input[type="number"],
+input[type="search"],
+textarea,
+select {
+  width: 100%;
+  padding: var(--ulbra-spacing-sm) var(--ulbra-spacing-md);
+  border: 1px solid var(--ulbra-color-input-border);
+  border-radius: var(--ulbra-radius-md);
+  background-color: var(--ulbra-color-input-bg);
+  color: var(--ulbra-color-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--ulbra-color-input-focus-border);
+  box-shadow: var(--ulbra-focus-ring);
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: var(--ulbra-color-disabled-bg);
+  color: var(--ulbra-color-disabled-text);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: var(--ulbra-focus-ring);
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--ulbra-spacing-lg);
+}
+
+th,
+td {
+  padding: var(--ulbra-spacing-md);
+  text-align: left;
+  border-bottom: 1px solid var(--ulbra-color-border);
+}
+
+th {
+  font-weight: var(--ulbra-font-weight-medium);
+  background-color: var(--ulbra-color-surface-dark);
+  color: var(--ulbra-color-text);
+}
+
+tr:hover {
+  background-color: var(--ulbra-color-neutral-lighter);
+}
+
+/* Utility classes */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
