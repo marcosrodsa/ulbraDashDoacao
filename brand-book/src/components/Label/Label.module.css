@@ -1,0 +1,15 @@
+/* Label Component Styles */
+
+.label {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #212529;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.required {
+  color: #dc3545;
+  margin-left: 0.25rem;
+}
