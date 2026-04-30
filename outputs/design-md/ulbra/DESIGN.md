@@ -947,6 +947,343 @@ This choice prioritizes clarity and reduces visual noise on pages serving thousa
 
 ---
 
+## 8.5 Real-World Composition Examples
+
+This section demonstrates how design tokens and components combine to create complete, responsive layouts. Each example shows ASCII diagrams, token usage, color roles, and responsive behavior.
+
+### Example 1: Admission Form
+
+**Purpose**: Multi-step enrollment form for prospective students. Shows form structure, validation states, and CTA placement.
+
+**Layout (Desktop)**:
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                                                                   │
+│  ULBRA Admission Form                              spacing: xxl   │
+│  Apply Now to Join Our Community                  (top padding)   │
+│                                                                   │
+│  ┌─────────────────────────────────────────────────────────────┐ │
+│  │ Full Name *                                                  │ │
+│  │ ┌─────────────────────────────────────────────────────────┐ │ │
+│  │ │  [input-text]                                           │ │ │
+│  │ └─────────────────────────────────────────────────────────┘ │ │
+│  │ spacing: md (between label and input)                      │ │
+│  │                                                              │ │
+│  │ Email Address *                                             │ │
+│  │ ┌─────────────────────────────────────────────────────────┐ │ │
+│  │ │  [input-text]  (border-color: #ced4da)                 │ │ │
+│  │ └─────────────────────────────────────────────────────────┘ │ │
+│  │ Helpful tip: We'll never share your email.                 │ │
+│  │ (text-muted: #6c757d, font: body-small)                   │ │
+│  │                                                              │ │
+│  │ Program of Interest *                                      │ │
+│  │ ┌─────────────────────────────────────────────────────────┐ │ │
+│  │ │  [select dropdown]                                      │ │ │
+│  │ └─────────────────────────────────────────────────────────┘ │ │
+│  │ spacing: md (below dropdown)                               │ │
+│  │                                                              │ │
+│  │  ┌──────────────────┐  ┌──────────────────┐               │ │
+│  │  │ [button-secondary]│  │ [button-primary] │               │ │
+│  │  │  Back             │  │  Continue        │               │ │
+│  │  └──────────────────┘  └──────────────────┘               │ │
+│  │  spacing: md (between buttons)                             │ │
+│  │                                                              │ │
+│  │ Error State Example:                                        │ │
+│  │ Email Address *                                             │ │
+│  │ ┌─────────────────────────────────────────────────────────┐ │ │
+│  │ │  invalid@input  ✗                                       │ │ │
+│  │ │  border: 1px solid #dc3545                              │ │ │
+│  │ └─────────────────────────────────────────────────────────┘ │ │
+│  │ Please enter a valid email address.                        │ │
+│  │ (color: #dc3545, font: body-small, weight: 400)           │ │
+│  │                                                              │ │
+│  └─────────────────────────────────────────────────────────────┘ │
+│  Card: bg: #ffffff, border: 1px #dee2e6, radius: 0.25rem       │
+│  Card padding: 1rem (desktop), 0.75rem (mobile)                 │
+│                                                                   │
+│  spacing: xxl (bottom padding)                                   │
+└─────────────────────────────────────────────────────────────────┘
+
+CONTAINER:  max-width: 1140px, gutter: 15px
+TYPOGRAPHY:
+  - Form Label: body (1rem, weight 400, color: #212529)
+  - Helper Text: body-small (0.875rem, weight 400, color: #6c757d)
+  - Error Text: body-small (0.875rem, weight 400, color: #dc3545)
+  - Form Title: section-heading (2.5rem, weight 500, color: #212529)
+  - Subtitle: body-large (1.25rem, weight 300, color: #6c757d)
+
+COLORS USED:
+  - Primary Button (#0d3634): "Continue" - primary action
+  - Secondary Button (#6c757d): "Back" - secondary action
+  - Input Border (default #ced4da): neutral form field
+  - Input Border (error #dc3545): validation failure
+  - Form Background (#ffffff): white surface
+  - Card Border (#dee2e6): soft frame
+  - Text (#212529): labels and content
+  - Muted Text (#6c757d): helper and secondary info
+
+RESPONSIVE BEHAVIOR:
+  - Desktop (lg): 2-column layout for optional fields, 1rem padding
+  - Tablet (md): Stack fields to 1 column, 1rem padding
+  - Mobile (xs): 100% width fields, 0.75rem padding
+  - Button width: auto on desktop, 100% stacked on mobile
+  - Typography unchanged across breakpoints (labels stay 1rem)
+```
+
+---
+
+### Example 2: Course Listing Grid
+
+**Purpose**: Display multiple course/program cards in a responsive grid. Shows card composition, badge usage, and grid collapse.
+
+**Layout (Desktop → Tablet → Mobile)**:
+```
+DESKTOP (lg, 3-column):
+┌──────────────────────┐  ┌──────────────────────┐  ┌──────────────────────┐
+│   ┌────────────────┐ │  │   ┌────────────────┐ │  │   ┌────────────────┐ │
+│   │  [Card Image]  │ │  │   │  [Card Image]  │ │  │   │  [Card Image]  │ │
+│   │  (16:9 aspect) │ │  │   │  (16:9 aspect) │ │  │   │  (16:9 aspect) │ │
+│   └────────────────┘ │  │   └────────────────┘ │  │   └────────────────┘ │
+│                      │  │                      │  │                      │
+│ Computer Science    │  │ Business Admin      │  │ Nursing             │
+│ (heading: 1.75rem)  │  │ (heading: 1.75rem)  │  │ (heading: 1.75rem)  │
+│ weight: 500         │  │ weight: 500         │  │ weight: 500         │
+│ color: #212529      │  │ color: #212529      │  │ color: #212529      │
+│                      │  │                      │  │                      │
+│ Explore a path...   │  │ Develop business    │  │ Join our mission... │
+│ (body: 1rem)        │  │ (body: 1rem)        │  │ (body: 1rem)        │
+│ color: #6c757d      │  │ color: #6c757d      │  │ color: #6c757d      │
+│ line-height: 1.5    │  │ line-height: 1.5    │  │ line-height: 1.5    │
+│                      │  │                      │  │                      │
+│ ┌────┐  ┌────┐      │  │ ┌────┐  ┌──────┐    │  │ ┌────┐  ┌────┐      │
+│ │Full│  │Online│    │  │ │Part│  │Campus│    │  │ │Full│  │Hybrid│   │
+│ │Time│  │      │    │  │ │Time│  │      │    │  │ │Time│  │      │   │
+│ └────┘  └────┘      │  │ └────┘  └──────┘    │  │ └────┘  └────┘      │
+│ (badges: 0.875rem)  │  │ (badges: 0.875rem)  │  │ (badges: 0.875rem)  │
+│ bg: #ffffff         │  │ bg: #ffffff         │  │ bg: #ffffff         │
+│ border: 1px #dee2e6│  │ border: 1px #dee2e6│  │ border: 1px #dee2e6│
+│ padding: 0.25rem... │  │ padding: 0.25rem... │  │ padding: 0.25rem... │
+│                      │  │                      │  │                      │
+│ Learn More ➜         │  │ Learn More ➜         │  │ Learn More ➜         │
+│ (link: #007bff)     │  │ (link: #007bff)     │  │ (link: #007bff)     │
+└──────────────────────┘  └──────────────────────┘  └──────────────────────┘
+spacing: lg (1.5rem between cards)
+Card: bg: #ffffff, border: 1px #dee2e6, radius: 0.25rem, padding: 1rem
+
+TABLET (md, 2-column):
+┌──────────────────────┐  ┌──────────────────────┐
+│  [Card - col-md-6]   │  │  [Card - col-md-6]   │
+└──────────────────────┘  └──────────────────────┘
+┌──────────────────────┐  ┌──────────────────────┐
+│  [Card - col-md-6]   │  │  [Card - col-md-6]   │
+└──────────────────────┘  └──────────────────────┘
+
+MOBILE (xs, 1-column):
+┌──────────────────────┐
+│  [Card - col-12]     │
+└──────────────────────┘
+┌──────────────────────┐
+│  [Card - col-12]     │
+└──────────────────────┘
+┌──────────────────────┐
+│  [Card - col-12]     │
+└──────────────────────┘
+
+GRID CLASSES & BREAKPOINTS:
+  Desktop (lg):  col-lg-4 (33.33% width, 3-column grid)
+  Tablet (md):   col-md-6 (50% width, 2-column grid)
+  Mobile (xs):   col-12 (100% width, 1-column stack)
+  Gutter: 15px (Bootstrap standard, 30px total gap between columns)
+
+CARD ANATOMY:
+  - Card Image: 100% width of card, aspect-ratio 16/9, radius 0.25rem top
+  - Title: 1.75rem (subheading), weight 500, color #212529, padding: md top
+  - Description: 1rem (body), weight 400, color #6c757d, padding: md top/bottom
+  - Badges: 0.875rem (caption), background #ffffff, border 1px #dee2e6,
+           padding 0.25rem 0.4rem, margin-right: xs
+  - Link: 1rem (body), color #007bff, hover #0056b3, padding: md top
+
+COLORS USED:
+  - Card Background (#ffffff): white surface
+  - Card Border (#dee2e6): soft frame
+  - Title (#212529): dark text
+  - Description (#6c757d): muted secondary text
+  - Badge Background (#ffffff): light background
+  - Badge Border (#dee2e6): subtle border
+  - Link (#007bff): primary link color
+  - Link Hover (#0056b3): darker blue on hover
+
+RESPONSIVE SPACING:
+  - Between cards (all breakpoints): 1.5rem (lg spacing token)
+  - Card padding: 1rem (md spacing token)
+  - Image margin-bottom: md (1rem)
+  - Title margin-top: md (1rem)
+  - Description margin-top: sm (0.5rem)
+  - Badges margin-top: md (1rem)
+  - Link margin-top: md (1rem)
+  - Mobile padding reduction: None (maintain 1rem padding for roomy feel)
+```
+
+---
+
+### Example 3: Hero Section (Homepage)
+
+**Purpose**: Hero banner showcasing ULBRA brand and primary CTA. Shows full-width layout, responsive typography, and button prominence.
+
+**Layout (Desktop → Mobile)**:
+```
+DESKTOP (992px+):
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                               │
+│                    spacing: xxl (padding-top: 4rem)                          │
+│                                                                               │
+│              Welcome to ULBRA — Your Path to Excellence                      │
+│              (display-hero: 6rem, weight 300, line-height 1.2)              │
+│              color: #212529, text-align: center                             │
+│                                                                               │
+│                    spacing: lg (margin-top: 1.5rem)                          │
+│                                                                               │
+│         Discover world-class education across 5 campuses. Enroll today.     │
+│         (body-large: 1.25rem, weight 300, line-height 1.5)                  │
+│         color: #6c757d, text-align: center, max-width: 70%                  │
+│         (centered horizontally via margin: 0 auto)                           │
+│                                                                               │
+│                    spacing: xl (margin-top: 2rem)                            │
+│                                                                               │
+│              ┌─────────────────────────┐  ┌─────────────────────────┐       │
+│              │  Apply Now              │  │  Learn More             │       │
+│              │ (button-primary, lg)    │  │ (button-secondary, lg)  │       │
+│              │ bg: #0d3634             │  │ bg: #6c757d             │       │
+│              │ text: #ffffff           │  │ text: #ffffff           │       │
+│              │ padding: 0.5rem 1rem    │  │ padding: 0.5rem 1rem    │       │
+│              │ font: 1.125rem          │  │ font: 1.125rem          │       │
+│              │ radius: 0.25rem         │  │ radius: 0.25rem         │       │
+│              │ hover: #062926          │  │ hover: #5a6268          │       │
+│              └─────────────────────────┘  └─────────────────────────┘       │
+│              spacing: md between buttons (1rem)                              │
+│                                                                               │
+│                    spacing: xxl (padding-bottom: 4rem)                       │
+│                                                                               │
+│ Background: Linear gradient or solid #ffffff (white)                        │
+│ Container: max-width: 1140px, margin: 0 auto, padding: 0 2rem              │
+│                                                                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+TABLET (576px–991px):
+┌────────────────────────────────────────────┐
+│                                            │
+│  spacing: xl (padding-top: 2rem)           │
+│                                            │
+│  Welcome to ULBRA                          │
+│  (display-large-2: 4.5rem, weight 300)    │
+│                                            │
+│  spacing: lg (margin-top: 1.5rem)          │
+│                                            │
+│  Discover education across our campuses.  │
+│  (body-large: 1.25rem, weight 300)        │
+│                                            │
+│  spacing: lg (margin-top: 1.5rem)          │
+│                                            │
+│  ┌──────────────────────────────────────┐ │
+│  │ Apply Now                            │ │
+│  │ (button-primary, md)                 │ │
+│  │ padding: 0.375rem 0.75rem            │ │
+│  │ 100% width of container              │ │
+│  └──────────────────────────────────────┘ │
+│  spacing: sm (margin-top: 0.5rem)          │
+│  ┌──────────────────────────────────────┐ │
+│  │ Learn More                           │ │
+│  │ (button-secondary, md)               │ │
+│  │ 100% width of container              │ │
+│  └──────────────────────────────────────┘ │
+│                                            │
+│  spacing: xl (padding-bottom: 2rem)        │
+│                                            │
+└────────────────────────────────────────────┘
+
+MOBILE (0–575px):
+┌─────────────────────────────────┐
+│                                 │
+│ spacing: lg (padding-top: 1.5rem) │
+│                                 │
+│ Welcome to ULBRA                │
+│ (display-large-2: 4.5rem)       │
+│ (Reduced from 6rem on desktop)  │
+│                                 │
+│ spacing: md (margin-top: 1rem)   │
+│                                 │
+│ Discover education. Join us.    │
+│ (body-large: 1.25rem)           │
+│ (Slightly condensed for space)  │
+│                                 │
+│ spacing: lg (margin-top: 1.5rem) │
+│                                 │
+│ ┌──────────────────────────────┐ │
+│ │ Apply Now                    │ │
+│ │ (button-primary)             │ │
+│ │ 100% width                   │ │
+│ │ padding: 0.375rem 0.75rem    │ │
+│ └──────────────────────────────┘ │
+│ spacing: sm (margin-top: 0.5rem)  │
+│ ┌──────────────────────────────┐ │
+│ │ Learn More                   │ │
+│ │ (button-secondary)           │ │
+│ │ 100% width                   │ │
+│ │ padding: 0.375rem 0.75rem    │ │
+│ └──────────────────────────────┘ │
+│                                 │
+│ spacing: lg (padding-bottom: 1.5rem) │
+│                                 │
+└─────────────────────────────────┘
+
+TYPOGRAPHY TOKENS (All Breakpoints):
+  - Headline Font: Inter variable, weight 300 (premium, aspirational)
+  - Subheading Font: Inter variable, weight 300 (friendly, light)
+  - Button Font: Inter variable, weight 400 (clear, readable)
+  - Line Heights: Headline 1.2, Subheading 1.5, Button 1.5
+
+COLORS USED:
+  - Background (#ffffff): white canvas, or gradient overlay
+  - Headline (#212529): dark charcoal text
+  - Subheading (#6c757d): muted gray secondary text
+  - Primary Button (#0d3634): dark teal brand color
+  - Primary Button Hover (#062926): darker teal
+  - Secondary Button (#6c757d): gray
+  - Secondary Button Hover (#5a6268): darker gray
+
+RESPONSIVE BEHAVIOR SUMMARY:
+  Desktop (lg):
+    - Headline: 6rem (display-hero)
+    - Subheading: 1.25rem (body-large)
+    - Top/Bottom Padding: 4rem (xxl spacing)
+    - Buttons: Side-by-side (auto width), md size
+    - Button Gap: 1rem (md spacing)
+
+  Tablet (md):
+    - Headline: 4.5rem (display-large-2, reduced ~25%)
+    - Subheading: 1.25rem (body-large, unchanged)
+    - Top/Bottom Padding: 2rem (xl spacing, reduced from 4rem)
+    - Buttons: Stacked vertically, 100% width, md size
+    - Button Gap: 0.5rem (sm spacing between stacked buttons)
+
+  Mobile (xs):
+    - Headline: 4.5rem (same as tablet, do NOT go below 3.5rem)
+    - Subheading: 1.25rem (unchanged, still readable)
+    - Top/Bottom Padding: 1.5rem (lg spacing)
+    - Container Padding: 0.75rem left/right (mobile gutter)
+    - Buttons: Stacked, 100% width, md size, max-width 400px (readability)
+    - Button Gap: 0.5rem (sm spacing)
+
+SPACING TOKENS USED:
+  - xxl (4rem): Desktop hero top/bottom padding
+  - xl (2rem): Tablet hero top/bottom padding, gaps between major elements
+  - lg (1.5rem): Margin between headline and subheading, mobile padding
+  - md (1rem): Margin between subheading and buttons, button padding
+  - sm (0.5rem): Gap between stacked buttons on mobile
+```
+
+---
+
 ## 9. Agent Prompt Guide
 
 ### Quick Color Reference
