@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/marco/Downloads/design-md/**)",
+      "Read(//c/Users/marco/Downloads/KV-ULBRA 2026-REDUZIDO/**)"
+    ]
+  }
+}

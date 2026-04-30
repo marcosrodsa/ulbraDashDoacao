@@ -1,0 +1,34 @@
+[
+  {
+    "family": "Inter",
+    "weight": "100 900",
+    "style": "normal",
+    "display": "swap",
+    "stretch": null,
+    "unicode_range": null,
+    "src_urls": [
+      "https://www.ulbra.br/themes/fontes/inter/Inter-Variable.woff2"
+    ],
+    "src_formats": [
+      "woff2"
+    ],
+    "source_css_url": "https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css",
+    "raw": "@font-face {\n            font-family: 'Inter';\n            src: url('https://www.ulbra.br/themes/fontes/inter/Inter-Variable.woff2') format('woff2');\n            font-weight: 100 900;\n            font-style: normal;\n            font-display: swap;\n        }"
+  },
+  {
+    "family": "Inter",
+    "weight": "100 900",
+    "style": "italic",
+    "display": "swap",
+    "stretch": null,
+    "unicode_range": null,
+    "src_urls": [
+      "https://www.ulbra.br/themes/fontes/inter/Inter-Italic-Variable.woff2"
+    ],
+    "src_formats": [
+      "woff2"
+    ],
+    "source_css_url": "https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css",
+    "raw": "@font-face {\n            font-family: 'Inter';\n            src: url('https://www.ulbra.br/themes/fontes/inter/Inter-Italic-Variable.woff2') format('woff2');\n            font-weight: 100 900;\n            font-style: italic;\n            font-display: swap;\n        }"
+  }
+]

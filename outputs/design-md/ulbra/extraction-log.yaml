@@ -1,0 +1,420 @@
+url: https://www.ulbra.br/
+extracted_at: 2026-04-30T21:20:50.490Z
+sources:
+  external_css_files: 1
+  preload_css_files: 0
+  imports_resolved: 0
+  inline_style_blocks: 3
+  inline_style_attrs: 4
+  failed_fetches: 0
+detection:
+  css_vars_total: 34
+  css_vars_primitive: 34
+  css_vars_alias: 0
+  font_faces: 2
+  unique_tokens_in_graph: 34
+tokens:
+  colors:
+    primary:
+      value: "#0d3634"
+      source: css_var
+      confidence: high
+      origin: --aelbra-cor-4
+    secondary:
+      value: "#045a52"
+      source: css_var
+      confidence: high
+      origin: --aelbra-cor-5
+    tertiary:
+      value: "#cca269"
+      source: css_var
+      confidence: high
+      origin: --aelbra-cor-2
+    neutral:
+      value: "#6c757d"
+      source: css_var
+      confidence: high
+      origin: --secondary
+    surface:
+      value: "#ffffff"
+      source: css_var
+      confidence: high
+      origin: --white
+    text:
+      value: "#212529"
+      source: css_declaration
+      confidence: medium
+      origin: body color
+    text-muted:
+      value: "#6c757d"
+      source: css_var
+      confidence: high
+      origin: --secondary
+    border:
+      value: "#dee2e6"
+      source: css_var
+      confidence: high
+      origin: --light
+    error:
+      value: "#dc3545"
+      source: css_var
+      confidence: high
+      origin: --danger
+    success:
+      value: "#28a745"
+      source: css_var
+      confidence: high
+      origin: --success
+    accent:
+      value: "#007bff"
+      source: css_var
+      confidence: high
+      origin: --primary
+    light-sand:
+      value: "#f5ce99"
+      source: css_var
+      confidence: high
+      origin: --aelbra-cor-1
+    brown:
+      value: "#66563d"
+      source: css_var
+      confidence: high
+      origin: --aelbra-cor-3
+    sage:
+      value: "#91baa3"
+      source: css_var
+      confidence: high
+      origin: --aelbra-cor-6
+  typography:
+    display-hero:
+      properties:
+        fontFamily:
+          value: Inter
+          source: font_face
+          confidence: high
+          origin: "@font-face"
+        fontSize:
+          value: 6rem
+          source: css_declaration
+          confidence: medium
+          origin: .display-1
+        fontWeight:
+          value: "300"
+          source: css_declaration
+          confidence: medium
+          origin: .display-1
+        lineHeight:
+          value: "1.2"
+          source: css_declaration
+          confidence: medium
+          origin: .display-1
+    display-large:
+      properties:
+        fontFamily:
+          value: Inter
+          source: unknown
+          confidence: low
+          origin: null
+        fontSize:
+          value: 5.5rem
+          source: unknown
+          confidence: low
+          origin: null
+        fontWeight:
+          value: "300"
+          source: unknown
+          confidence: low
+          origin: null
+        lineHeight:
+          value: "1.2"
+          source: unknown
+          confidence: low
+          origin: null
+    display-large-2:
+      properties:
+        fontFamily:
+          value: Inter
+          source: unknown
+          confidence: low
+          origin: null
+        fontSize:
+          value: 4.5rem
+          source: unknown
+          confidence: low
+          origin: null
+        fontWeight:
+          value: "300"
+          source: unknown
+          confidence: low
+          origin: null
+        lineHeight:
+          value: "1.2"
+          source: unknown
+          confidence: low
+          origin: null
+    display-medium:
+      properties:
+        fontFamily:
+          value: Inter
+          source: unknown
+          confidence: low
+          origin: null
+        fontSize:
+          value: 3.5rem
+          source: unknown
+          confidence: low
+          origin: null
+        fontWeight:
+          value: "300"
+          source: unknown
+          confidence: low
+          origin: null
+        lineHeight:
+          value: "1.2"
+          source: unknown
+          confidence: low
+          origin: null
+    section-heading:
+      properties:
+        fontFamily:
+          value: Inter
+          source: unknown
+          confidence: low
+          origin: null
+        fontSize:
+          value: 2.5rem
+          source: css_declaration
+          confidence: medium
+          origin: h1
+        fontWeight:
+          value: "500"
+          source: css_declaration
+          confidence: medium
+          origin: h1,h2,h3,h4,h5,h6
+        lineHeight:
+          value: "1.2"
+          source: unknown
+          confidence: low
+          origin: null
+    subheading-large:
+      properties:
+        fontFamily:
+          value: Inter
+          source: unknown
+          confidence: low
+          origin: null
+        fontSize:
+          value: 2rem
+          source: css_declaration
+          confidence: medium
+          origin: h2
+        fontWeight:
+          value: "500"
+          source: unknown
+          confidence: low
+          origin: null
+        lineHeight:
+          value: "1.2"
+          source: unknown
+          confidence: low
+          origin: null
+    subheading:
+      properties:
+        fontFamily:
+          value: Inter
+          source: unknown
+          confidence: low
+          origin: null
+        fontSize:
+          value: 1.75rem
+          source: css_declaration
+          confidence: medium
+          origin: h3
+        fontWeight:
+          value: "500"
+          source: unknown
+          confidence: low
+          origin: null
+        lineHeight:
+          value: "1.2"
+          source: unknown
+          confidence: low
+          origin: null
+    body-large:
+      properties:
+        fontFamily:
+          value: Inter
+          source: unknown
+          confidence: low
+          origin: null
+        fontSize:
+          value: 1.25rem
+          source: css_declaration
+          confidence: medium
+          origin: .lead
+        fontWeight:
+          value: "300"
+          source: unknown
+          confidence: low
+          origin: null
+        lineHeight:
+          value: "1.5"
+          source: unknown
+          confidence: low
+          origin: null
+    body:
+      properties:
+        fontFamily:
+          value: Inter
+          source: unknown
+          confidence: low
+          origin: null
+        fontSize:
+          value: 1rem
+          source: css_declaration
+          confidence: medium
+          origin: body
+        fontWeight:
+          value: "400"
+          source: unknown
+          confidence: low
+          origin: null
+        lineHeight:
+          value: "1.5"
+          source: unknown
+          confidence: low
+          origin: null
+    body-small:
+      properties:
+        fontFamily:
+          value: Inter
+          source: unknown
+          confidence: low
+          origin: null
+        fontSize:
+          value: 0.875rem
+          source: css_declaration
+          confidence: medium
+          origin: .small, small
+        fontWeight:
+          value: "400"
+          source: unknown
+          confidence: low
+          origin: null
+        lineHeight:
+          value: "1.5"
+          source: unknown
+          confidence: low
+          origin: null
+    button:
+      properties:
+        fontFamily:
+          value: Inter
+          source: unknown
+          confidence: low
+          origin: null
+        fontSize:
+          value: 1rem
+          source: unknown
+          confidence: low
+          origin: null
+        fontWeight:
+          value: "400"
+          source: unknown
+          confidence: low
+          origin: null
+        lineHeight:
+          value: "1.5"
+          source: unknown
+          confidence: low
+          origin: null
+    caption:
+      properties:
+        fontFamily:
+          value: Inter
+          source: unknown
+          confidence: low
+          origin: null
+        fontSize:
+          value: 0.875rem
+          source: unknown
+          confidence: low
+          origin: null
+        fontWeight:
+          value: "400"
+          source: unknown
+          confidence: low
+          origin: null
+        lineHeight:
+          value: "1.5"
+          source: unknown
+          confidence: low
+          origin: null
+  rounded:
+    none:
+      value: 0px
+      source: unknown
+      confidence: low
+      origin: null
+    sm:
+      value: 0.2rem
+      source: unknown
+      confidence: low
+      origin: null
+    md:
+      value: 0.25rem
+      source: unknown
+      confidence: low
+      origin: null
+    lg:
+      value: 0.5rem
+      source: unknown
+      confidence: low
+      origin: null
+    xl:
+      value: 1rem
+      source: unknown
+      confidence: low
+      origin: null
+  spacing:
+    xs:
+      value: 0.25rem
+      source: unknown
+      confidence: low
+      origin: null
+    sm:
+      value: 0.5rem
+      source: unknown
+      confidence: low
+      origin: null
+    md:
+      value: 1rem
+      source: unknown
+      confidence: low
+      origin: null
+    lg:
+      value: 1.5rem
+      source: unknown
+      confidence: low
+      origin: null
+    xl:
+      value: 2rem
+      source: unknown
+      confidence: low
+      origin: null
+    xxl:
+      value: 4rem
+      source: unknown
+      confidence: low
+      origin: null
+confidence_summary:
+  high: 14
+  medium: 11
+  low: 48
+lint:
+  ran: true
+  exit_code: null
+  errors_count: -1
+  warnings_count: 0
+  stdout_excerpt: ""
+  stderr_excerpt: ""

@@ -1,0 +1,240 @@
+[
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--blue",
+    "value": "#007bff",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--indigo",
+    "value": "#6610f2",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--purple",
+    "value": "#6f42c1",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--pink",
+    "value": "#e83e8c",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--red",
+    "value": "#dc3545",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--orange",
+    "value": "#fd7e14",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--yellow",
+    "value": "#ffc107",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--green",
+    "value": "#28a745",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--teal",
+    "value": "#20c997",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--cyan",
+    "value": "#17a2b8",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--white",
+    "value": "#fff",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--gray",
+    "value": "#6c757d",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--gray-dark",
+    "value": "#343a40",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--primary",
+    "value": "#007bff",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--secondary",
+    "value": "#6c757d",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--success",
+    "value": "#28a745",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--info",
+    "value": "#17a2b8",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--warning",
+    "value": "#ffc107",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--danger",
+    "value": "#dc3545",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--light",
+    "value": "#f8f9fa",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--dark",
+    "value": "#343a40",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--breakpoint-xs",
+    "value": "0",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--breakpoint-sm",
+    "value": "576px",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--breakpoint-md",
+    "value": "768px",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--breakpoint-lg",
+    "value": "992px",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--breakpoint-xl",
+    "value": "1200px",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--font-family-sans-serif",
+    "value": "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css ── */ /*! * Bootstrap v4.3.1 (https://getbootstrap.com/) * Copyright 2011-2019 The Bootstrap Authors * Copyright 2011-2019 Twitter, I",
+    "name": "--font-family-monospace",
+    "value": "SFMono-Regular,Menlo,Monaco,Consolas,\"Liberation Mono\",\"Courier New\",monospace",
+    "is_alias": false,
+    "line": 1
+  },
+  {
+    "selector": "/* ── inline <style> #2 ── */ :root",
+    "name": "--aelbra-cor-1",
+    "value": "#f5ce99",
+    "is_alias": false,
+    "line": 14
+  },
+  {
+    "selector": "/* ── inline <style> #2 ── */ :root",
+    "name": "--aelbra-cor-2",
+    "value": "#cca269",
+    "is_alias": false,
+    "line": 14
+  },
+  {
+    "selector": "/* ── inline <style> #2 ── */ :root",
+    "name": "--aelbra-cor-3",
+    "value": "#66563d",
+    "is_alias": false,
+    "line": 14
+  },
+  {
+    "selector": "/* ── inline <style> #2 ── */ :root",
+    "name": "--aelbra-cor-4",
+    "value": "#0d3634",
+    "is_alias": false,
+    "line": 14
+  },
+  {
+    "selector": "/* ── inline <style> #2 ── */ :root",
+    "name": "--aelbra-cor-5",
+    "value": "#045a52",
+    "is_alias": false,
+    "line": 14
+  },
+  {
+    "selector": "/* ── inline <style> #2 ── */ :root",
+    "name": "--aelbra-cor-6",
+    "value": "#91baa3",
+    "is_alias": false,
+    "line": 14
+  }
+]

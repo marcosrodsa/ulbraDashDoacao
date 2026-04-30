@@ -1,0 +1,10 @@
+{
+  "external": [
+    "https://www.ulbra.br/themes/bootstrap4/css/bootstrap.min.css"
+  ],
+  "preload": [],
+  "inline_style_blocks": 3,
+  "inline_style_attrs": 4,
+  "imports_resolved": 0,
+  "failed": []
+}
