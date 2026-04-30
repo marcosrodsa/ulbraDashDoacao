@@ -28,9 +28,6 @@ yarn-error.log*
 *~
 .DS_Store
 
-# Storybook
-.storybook/
-
 # Coverage
 coverage/
 .nyc_output/
