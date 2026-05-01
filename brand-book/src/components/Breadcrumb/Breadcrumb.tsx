@@ -7,11 +7,11 @@ export interface BreadcrumbItem {
   current?: boolean;
 }
 
-export interface BreadcrumbProps extends React.HTMLAttributes<HTMLNavElement> {
+export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   items: BreadcrumbItem[];
 }
 
-const Breadcrumb = React.forwardRef<HTMLNavElement, BreadcrumbProps>(
+const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
   (
     {
       items,

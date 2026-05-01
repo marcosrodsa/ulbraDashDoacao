@@ -47,7 +47,7 @@ export const ThreeColumn: Story = {
     columns: 4,
     gap: 'md',
   },
-  render: (args) => (
+  render: (args: Story['args']) => (
     <Grid {...args}>
       <GridItem number={1} />
       <GridItem number={2} />
@@ -61,7 +61,7 @@ export const TwoColumn: Story = {
     columns: 6,
     gap: 'md',
   },
-  render: (args) => (
+  render: (args: Story['args']) => (
     <Grid {...args}>
       <GridItem number={1} />
       <GridItem number={2} />

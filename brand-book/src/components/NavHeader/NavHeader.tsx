@@ -7,14 +7,14 @@ export interface NavItem {
   active?: boolean;
 }
 
-export interface NavHeaderProps extends React.HTMLAttributes<HTMLHeaderElement> {
+export interface NavHeaderProps extends React.HTMLAttributes<HTMLElement> {
   logo?: ReactNode;
   brand?: string;
   items: NavItem[];
   onHamburgerToggle?: (isOpen: boolean) => void;
 }
 
-const NavHeader = React.forwardRef<HTMLHeaderElement, NavHeaderProps>(
+const NavHeader = React.forwardRef<HTMLElement, NavHeaderProps>(
   (
     {
       logo,

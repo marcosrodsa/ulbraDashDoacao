@@ -38,7 +38,7 @@ export const Default: Story = {
     required: false,
     error: false,
   },
-  render: (args) => (
+  render: (args: Story['args']) => (
     <FormGroup {...args}>
       <Input type="email" placeholder="Enter your email" />
     </FormGroup>
@@ -52,7 +52,7 @@ export const WithError: Story = {
     error: true,
     errorMessage: 'Please enter a valid email address',
   },
-  render: (args) => (
+  render: (args: Story['args']) => (
     <FormGroup {...args}>
       <Input type="email" placeholder="Enter your email" />
     </FormGroup>
