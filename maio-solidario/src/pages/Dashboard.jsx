@@ -358,9 +358,9 @@ export default function DashboardPage() {
         grid: {
           left: '100px',
           right: '40px',
-          bottom: '180px',
+          bottom: '220px',
           top: '20px',
-          containLabel: true,
+          containLabel: false,
         },
         xAxis: {
           type: 'category',
@@ -533,9 +533,9 @@ export default function DashboardPage() {
         grid: {
           left: '60px',
           right: '40px',
-          bottom: '60px',
+          bottom: '220px',
           top: '20px',
-          containLabel: true,
+          containLabel: false,
         },
         xAxis: {
           type: 'category',

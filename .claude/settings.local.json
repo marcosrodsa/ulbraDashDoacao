@@ -1,8 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Read(//c/Users/marco/Downloads/design-md/**)",
-      "Read(//c/Users/marco/Downloads/KV-ULBRA 2026-REDUZIDO/**)"
+      "WebFetch(domain:localhost)",
+      "Bash(curl -s http://localhost:8000/brandbook.html)",
+      "Bash(curl -s http://localhost:5175/)",
+      "Read(//c/Users/marco/AppData/Local/Temp/claude/c--Users-marco-OneDrive-Documents-GitHub-ulbraDashDoacao/5cb2caa5-da85-45e4-8da0-d958c4796ea4/tasks/**)",
+      "Bash(git add *)",
+      "Bash(git push *)",
+      "Bash(pkill -f \"node\")"
     ]
   }
 }
