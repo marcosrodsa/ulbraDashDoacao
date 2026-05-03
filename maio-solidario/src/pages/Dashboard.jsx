@@ -835,8 +835,8 @@ export default function DashboardPage() {
                     }
 
                     return (
-                      <>
-                        <tr key={unit.nome} onClick={() => setExpandedUnit(isExpanded ? null : unit.nome)} style={{ cursor: 'pointer' }}>
+                      <React.Fragment key={unit.nome}>
+                        <tr onClick={() => setExpandedUnit(isExpanded ? null : unit.nome)} style={{ cursor: 'pointer' }}>
                           <td className="pos">
                             <span className="posicao-badge">{absoluteIdx + 1}º</span>
                           </td>
@@ -884,7 +884,7 @@ export default function DashboardPage() {
                             </td>
                           </tr>
                         )}
-                      </>
+                      </React.Fragment>
                     )
                   })}
               </tbody>

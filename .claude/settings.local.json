@@ -7,7 +7,8 @@
       "Read(//c/Users/marco/AppData/Local/Temp/claude/c--Users-marco-OneDrive-Documents-GitHub-ulbraDashDoacao/5cb2caa5-da85-45e4-8da0-d958c4796ea4/tasks/**)",
       "Bash(git add *)",
       "Bash(git push *)",
-      "Bash(pkill -f \"node\")"
+      "Bash(pkill -f \"node\")",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
