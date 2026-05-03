@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo, Fragment } from 'react'
 import * as echarts from 'echarts'
 import ulbraLogo from '../assets/ulbra_logo.png'
 import { IconFood, IconCleanliness, IconApparel, IconPetCare, IconChartColumn, IconTrophy, IconRankingStar, IconClipboardList, IconBoxesStacked } from '../components/FontAwesomeIcons'
+import ComposicaoToggle from '../components/Features/ComposicaoToggle'
 import { supabase } from '../lib/supabaseClient'
 import '../styles/dashboard.css'
 import '../styles/icons.css'
@@ -113,7 +114,6 @@ export default function DashboardPage() {
   })
   const [viewMode, setViewMode] = useState('diario') // 'diario' ou 'semanal'
   const [expandedUnit, setExpandedUnit] = useState(null) // para expandir linha na tabela
-  const [composicaoView, setComposicaoView] = useState('stacked') // 'stacked' ou 'grouped'
   const [contextExpanded, setContextExpanded] = useState(false) // contexto colapsável
   const [auditPage, setAuditPage] = useState(1) // paginação tabela auditoria
   const [rankingPage, setRankingPage] = useState(1) // paginação tabela ranking
@@ -130,8 +130,6 @@ export default function DashboardPage() {
   const [ultimasDoacoes, setUltimasDoacoes] = useState([])
   const [evolucaoData, setEvolucaoData] = useState([])
 
-  const chartComposicaoRef = useRef(null)
-  const chartComposicaoInstance = useRef(null)
   const chartRankingRef = useRef(null)
   const chartRankingInstance = useRef(null)
   const chartEvolucaoRef = useRef(null)
@@ -260,13 +258,6 @@ export default function DashboardPage() {
   useEffect(() => {
     const initAndUpdate = () => {
       // Inicializar gráficos se ainda não foram
-      if (!chartComposicaoInstance.current && chartComposicaoRef.current) {
-        try {
-          chartComposicaoInstance.current = echarts.init(chartComposicaoRef.current, null, { renderer: 'canvas' })
-        } catch (e) {
-          console.error('Erro ao init Composicao:', e)
-        }
-      }
       if (!chartRankingInstance.current && chartRankingRef.current) {
         try {
           chartRankingInstance.current = echarts.init(chartRankingRef.current, null, { renderer: 'canvas' })
@@ -307,12 +298,11 @@ export default function DashboardPage() {
       window.removeEventListener('load', initAndUpdate)
       clearTimeout(timer)
     }
-  }, [totais, ranking, evolucaoData, filteredDoacoes, composicaoView])
+  }, [totais, ranking, evolucaoData, filteredDoacoes])
 
   // Handle window resize - make charts responsive
   useEffect(() => {
     const handleResize = () => {
-      chartComposicaoInstance.current?.resize()
       chartRankingInstance.current?.resize()
       chartEvolucaoInstance.current?.resize()
     }
@@ -939,26 +929,12 @@ export default function DashboardPage() {
             <div ref={chartEvolucaoRef} className="echarts-container" style={{ minHeight: '400px', width: '100%' }}></div>
           </div>
 
-          {/* Gráfico - Composição por Unidade (Top 8) */}
+          {/* Gráfico - Composição por Unidade (Top 8) com Toggle */}
           <div className="chart-card chart-card-full">
             <div className="chart-header">
               <h3><IconChartColumn /> Composição por Unidade (Top 8)</h3>
-              <div className="chart-toggle">
-                <button
-                  className={`toggle-btn ${composicaoView === 'stacked' ? 'active' : ''}`}
-                  onClick={() => setComposicaoView('stacked')}
-                >
-                  Empilhado
-                </button>
-                <button
-                  className={`toggle-btn ${composicaoView === 'grouped' ? 'active' : ''}`}
-                  onClick={() => setComposicaoView('grouped')}
-                >
-                  Agrupado
-                </button>
-              </div>
             </div>
-            <div ref={chartComposicaoRef} className="echarts-container" style={{ minHeight: '400px', width: '100%' }}></div>
+            <ComposicaoToggle doacoes={filteredDoacoes} ranking={ranking} unidades={unidadesDB} />
           </div>
         </div>
       </section>

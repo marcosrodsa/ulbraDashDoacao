@@ -8,7 +8,12 @@
       "Bash(git add *)",
       "Bash(git push *)",
       "Bash(pkill -f \"node\")",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git commit -m 'fix: import Fragment from react *)",
+      "Read(//c/Users/marco/OneDrive/Documents/GitHub/ulbraDashDoacao/maio-solidario/src/styles//**)",
+      "Read(//c/Users/marco/OneDrive/Documents/GitHub/ulbraDashDoacao/maio-solidario/src/styles/**)",
+      "Read(//c/Users/marco/OneDrive/Documents/GitHub/ulbraDashDoacao/maio-solidario/**)",
+      "Bash(npm test *)"
     ]
   }
 }

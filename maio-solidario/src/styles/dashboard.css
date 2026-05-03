@@ -1378,3 +1378,45 @@ tr:hover {
     font-size: 12px;
   }
 }
+
+/* ComposicaoToggle Component */
+.composicao-toggle-container {
+  width: 100%;
+}
+
+.composicao-controls {
+  display: flex;
+  gap: 4px;
+  background: rgba(6, 30, 28, 0.6);
+  border: 1px solid var(--surface-line);
+  border-radius: 6px;
+  padding: 2px;
+  margin-bottom: 24px;
+}
+
+.composicao-btn {
+  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--fg-muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 200ms var(--ease-standard);
+  font-family: var(--font-sans);
+}
+
+.composicao-btn:hover {
+  color: var(--fg);
+}
+
+.composicao-btn.active {
+  background: var(--ulbra-gold);
+  color: var(--ulbra-primary-deep);
+}
+
+/* Heatmap Container */
+.heatmap-container {
+  width: 100%;
+}

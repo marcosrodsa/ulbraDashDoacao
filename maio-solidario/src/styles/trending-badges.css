@@ -1,0 +1,139 @@
+/* Trending Section Styles */
+.trending-section {
+  background: rgba(26, 86, 83, 0.3);
+  border: 1px solid rgba(145, 186, 163, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.trending-header {
+  margin-bottom: 16px;
+}
+
+.trending-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #faf7f2;
+  margin: 0 0 4px 0;
+  letter-spacing: 0.5px;
+}
+
+.trending-subtitle {
+  font-size: 12px;
+  color: #c4b5a0;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Badges Container */
+.trending-badges {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Individual Badge */
+.trending-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 2px solid;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  font-size: 13px;
+  font-weight: 600;
+  color: #faf7f2;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.trending-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.trending-fire {
+  font-size: 14px;
+  animation: flicker 0.6s ease-in-out infinite;
+}
+
+.trending-emoji {
+  font-size: 14px;
+}
+
+.trending-label {
+  color: #faf7f2;
+}
+
+.trending-growth {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+/* Empty State */
+.trending-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #c4b5a0;
+  font-size: 13px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 1px dashed rgba(145, 186, 163, 0.2);
+}
+
+/* Fire flicker animation */
+@keyframes flicker {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .trending-badges {
+    gap: 10px;
+  }
+
+  .trending-badge {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .trending-fire,
+  .trending-emoji {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .trending-section {
+    padding: 16px;
+  }
+
+  .trending-title {
+    font-size: 16px;
+  }
+
+  .trending-badges {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .trending-badge {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
