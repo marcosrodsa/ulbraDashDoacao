@@ -3,6 +3,7 @@ import { IconFood, IconCleanliness, IconApparel, IconPetCare } from '../componen
 import Toast from '../components/Toast'
 import ulbraLogo from '../assets/ulbra_logo.png'
 import { supabase } from '../lib/supabaseClient'
+import { useCampaignSettings } from '../hooks/useCampaignSettings'
 import '../styles/cadastro.css'
 import '../styles/icons.css'
 
@@ -26,6 +27,13 @@ export default function CadastroPage() {
   const [unidades, setUnidades] = useState([])
   const [loading, setLoading] = useState(false)
 
+  // Meta config states
+  const { settings, loading: metaLoading, updateMeta } = useCampaignSettings()
+  const [metaValue, setMetaValue] = useState('')
+  const [metaSaving, setMetaSaving] = useState(false)
+  const [metaSaveMessage, setMetaSaveMessage] = useState('')
+  const [metaSaveType, setMetaSaveType] = useState('')
+
   // Buscar unidades do Supabase
   useEffect(() => {
     const fetchUnidades = async () => {
@@ -43,11 +51,52 @@ export default function CadastroPage() {
     fetchUnidades()
   }, [])
 
+  // Initialize meta value when settings load
+  useEffect(() => {
+    if (!metaLoading && settings.meta_doacoes) {
+      setMetaValue(String(settings.meta_doacoes))
+    }
+  }, [settings.meta_doacoes, metaLoading])
+
   const categoriaAtual = CATEGORIAS.find(c => c.id === formData.categoria)
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleMetaChange = (e) => {
+    setMetaValue(e.target.value)
+    setMetaSaveMessage('')
+  }
+
+  const handleMetaSave = async (e) => {
+    e.preventDefault()
+
+    // Validação
+    if (!metaValue || isNaN(metaValue) || parseInt(metaValue) <= 0) {
+      setMetaSaveMessage('Meta deve ser um número maior que zero')
+      setMetaSaveType('error')
+      return
+    }
+
+    setMetaSaving(true)
+    try {
+      const result = await updateMeta(parseInt(metaValue))
+      if (result.success) {
+        setMetaSaveMessage('✓ Meta atualizada com sucesso!')
+        setMetaSaveType('success')
+      } else {
+        setMetaSaveMessage('Erro ao atualizar meta: ' + result.error)
+        setMetaSaveType('error')
+      }
+    } catch (error) {
+      setMetaSaveMessage('Erro ao atualizar meta: ' + error.message)
+      setMetaSaveType('error')
+      console.error('Erro:', error)
+    } finally {
+      setMetaSaving(false)
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -196,6 +245,48 @@ export default function CadastroPage() {
             <button type="submit" className="btn-submit" disabled={loading}>
               {loading ? 'Registrando...' : 'Registrar Doação'}
             </button>
+          </form>
+        </div>
+
+        <div className="config-section">
+          <h2>⚙️ Configurações da Campanha</h2>
+          <p className="config-subtitle">Ajuste os parâmetros da campanha Maio Solidário</p>
+
+          <form onSubmit={handleMetaSave} className="config-form">
+            <div className="config-group">
+              <label htmlFor="meta_doacoes" className="config-label">Meta de Doações</label>
+              {metaLoading ? (
+                <div className="config-loading">
+                  <span className="spinner"></span>
+                  <span>Carregando configurações...</span>
+                </div>
+              ) : (
+                <>
+                  <div className="config-input-wrapper">
+                    <input
+                      type="number"
+                      id="meta_doacoes"
+                      className="config-input"
+                      value={metaValue}
+                      onChange={handleMetaChange}
+                      disabled={metaSaving}
+                      min="1"
+                      placeholder="Ex: 500"
+                    />
+                    <span className="config-unit">doações</span>
+                  </div>
+                  <button type="submit" className="config-button" disabled={metaSaving}>
+                    {metaSaving ? 'Salvando...' : 'Salvar'}
+                  </button>
+                </>
+              )}
+            </div>
+
+            {metaSaveMessage && (
+              <div className={`config-message config-message-${metaSaveType}`}>
+                {metaSaveMessage}
+              </div>
+            )}
           </form>
         </div>
 
