@@ -1311,18 +1311,14 @@ tr:hover {
 
   .filter-row:last-child {
     display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 10px !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
     width: 100% !important;
   }
 
-  .filter-row:last-child .filter-label,
-  .filter-row:last-child .filter-chips {
-    flex-basis: 100%;
-  }
-
   .filter-row:last-child .filter-label {
+    width: 100%;
     font-size: 11px;
     text-align: left;
     margin: 0;
@@ -1339,12 +1335,13 @@ tr:hover {
 
   .filter-row:last-child .chip-reset,
   .filter-row:last-child .refresh-filter-btn {
-    flex-basis: auto;
-    width: auto;
     height: 42px;
     padding: 10px 16px;
     font-size: 13px;
     box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .chip-reset {
