@@ -1,0 +1,224 @@
+/* ============================================================
+   Loading States & Skeleton Components
+   ============================================================ */
+
+/* ============================================================
+   SKELETON — Base Styles
+   ============================================================ */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(204, 162, 105, 0.1) 0%,
+    rgba(204, 162, 105, 0.2) 50%,
+    rgba(204, 162, 105, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  border-radius: var(--radius-md);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+    background-position: 200% 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+    background-position: -200% 0;
+  }
+}
+
+/* ============================================================
+   SPINNER — Rotating Border Spinner
+   ============================================================ */
+
+.spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(204, 162, 105, 0.2);
+  border-top: 4px solid var(--ulbra-gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================
+   SKELETON LOADER — Base Element
+   ============================================================ */
+
+.skeleton-element {
+  display: block;
+  border-radius: var(--radius-md);
+  background-color: rgba(204, 162, 105, 0.1);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ============================================================
+   KPI CARD SKELETON
+   ============================================================ */
+
+.kpi-card-skeleton {
+  padding: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.kpi-card-skeleton .skeleton-label {
+  height: 14px;
+  width: 60%;
+  margin-bottom: var(--sp-1);
+}
+
+.kpi-card-skeleton .skeleton-value {
+  height: 40px;
+  width: 80%;
+  margin-bottom: var(--sp-3);
+}
+
+.kpi-card-skeleton .skeleton-metric {
+  height: 36px;
+  width: 100%;
+}
+
+/* ============================================================
+   CHART SKELETON
+   ============================================================ */
+
+.chart-skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-5);
+  padding: var(--sp-8) var(--sp-6);
+  min-height: 300px;
+  border-radius: var(--radius-lg);
+  background: rgba(204, 162, 105, 0.05);
+}
+
+.chart-skeleton .spinner {
+  width: 40px;
+  height: 40px;
+}
+
+.chart-skeleton-message {
+  font-size: var(--fs-body);
+  color: var(--fg-muted);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* ============================================================
+   TABLE SKELETON
+   ============================================================ */
+
+.table-skeleton {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-skeleton thead {
+  border-bottom: 2px solid var(--surface-line);
+}
+
+.table-skeleton th {
+  padding: var(--sp-4);
+  text-align: left;
+  height: 48px;
+}
+
+.table-skeleton th .skeleton {
+  height: 16px;
+  width: 70%;
+}
+
+.table-skeleton tbody tr {
+  border-bottom: 1px solid var(--surface-line);
+}
+
+.table-skeleton tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table-skeleton td {
+  padding: var(--sp-4);
+  height: 56px;
+  vertical-align: middle;
+}
+
+.table-skeleton .skeleton {
+  height: 16px;
+  width: 85%;
+  margin: var(--sp-2) 0;
+}
+
+.table-skeleton .skeleton.small {
+  width: 60%;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .chart-skeleton {
+    min-height: 250px;
+    padding: var(--sp-6) var(--sp-4);
+  }
+
+  .spinner {
+    width: 32px;
+    height: 32px;
+    border-width: 3px;
+  }
+
+  .table-skeleton td {
+    padding: var(--sp-3);
+    height: 48px;
+  }
+
+  .table-skeleton th {
+    padding: var(--sp-3);
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-skeleton {
+    min-height: 200px;
+    padding: var(--sp-5) var(--sp-3);
+    gap: var(--sp-4);
+  }
+
+  .chart-skeleton-message {
+    font-size: var(--fs-small);
+  }
+
+  .table-skeleton td {
+    padding: var(--sp-2);
+    height: 44px;
+  }
+
+  .table-skeleton th {
+    padding: var(--sp-2);
+    height: 36px;
+  }
+
+  .table-skeleton .skeleton {
+    height: 14px;
+  }
+}
