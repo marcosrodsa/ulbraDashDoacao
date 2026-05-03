@@ -358,7 +358,7 @@ export default function DashboardPage() {
         grid: {
           left: '100px',
           right: '40px',
-          bottom: '220px',
+          bottom: '150px',
           top: '20px',
           containLabel: false,
         },
@@ -533,7 +533,7 @@ export default function DashboardPage() {
         grid: {
           left: '60px',
           right: '40px',
-          bottom: '220px',
+          bottom: '110px',
           top: '20px',
           containLabel: false,
         },
@@ -662,7 +662,7 @@ export default function DashboardPage() {
         <div className="container">
           <div className="filter-row">
             <div className="filter-group">
-              <label>Unidade:</label>
+              <label>Unity:</label>
               <select
                 value={filters.unidade}
                 onChange={(e) => setFilters(f => ({ ...f, unidade: e.target.value }))}

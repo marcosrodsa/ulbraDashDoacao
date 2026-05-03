@@ -1232,17 +1232,6 @@ tr:hover {
     padding: 20px;
   }
 
-  .filter-row {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: stretch;
-  }
-
-  .filter-group {
-    width: 100%;
-  }
-
   .filter-select,
   .filter-date {
     width: 100%;
@@ -1283,10 +1272,6 @@ tr:hover {
     flex-direction: row !important;
     gap: 4px !important;
     align-items: center !important;
-  }
-
-  .filter-group:nth-child(1) {
-    flex: 0 1 100% !important;
   }
 
   .filter-group:nth-child(3) {
@@ -1331,12 +1316,18 @@ tr:hover {
     flex-wrap: wrap;
   }
 
-  .chip-reset,
-  .refresh-filter-btn {
-    flex: 0 1 calc(50% - 4px);
+  .chip-reset {
+    flex: 0 1 calc(100% - 4px);
     padding: 6px 10px;
     font-size: 12px;
-    height: auto;
+  }
+
+  .refresh-filter-btn {
+    padding: 4px 8px;
+    font-size: 10px;
+    height: 28px;
+    min-width: 36px;
+    flex-shrink: 0;
   }
 
   .kpi-grid {
