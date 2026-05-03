@@ -499,15 +499,14 @@ tr:hover {
 .breakdown-items {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
 
 .breakdown-item {
-  display: grid;
-  grid-template-columns: 24px 1fr auto auto;
+  display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 10px 12px;
+  gap: 12px;
+  padding: 8px 12px;
   border-radius: 6px;
   font-size: 14px;
   color: var(--fg);
@@ -519,31 +518,33 @@ tr:hover {
 }
 
 .breakdown-dot {
-  font-size: 16px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .breakdown-name {
   font-weight: 600;
   color: var(--fg);
+  flex: 1;
 }
 
 .breakdown-value {
   color: var(--ulbra-gold-light);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
+  min-width: 35px;
   text-align: right;
-  min-width: 40px;
 }
 
 .breakdown-pct {
   font-size: 12px;
   color: var(--fg-muted);
   font-weight: 500;
+  min-width: 40px;
   text-align: right;
-  min-width: 45px;
 }
 
 /* Feed Section */
