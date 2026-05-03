@@ -499,26 +499,28 @@ tr:hover {
 .breakdown-items {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
+  align-items: center;
 }
 
 .breakdown-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 12px;
+  gap: 4px;
+  padding: 6px 12px;
   border-radius: 6px;
   font-size: 14px;
   color: var(--fg);
+  background: rgba(26, 86, 83, 0.1);
   transition: all 200ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .breakdown-item:hover {
-  background: rgba(26, 86, 83, 0.25);
+  background: rgba(26, 86, 83, 0.2);
 }
 
 .breakdown-dot {
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -528,23 +530,21 @@ tr:hover {
 .breakdown-name {
   font-weight: 600;
   color: var(--fg);
-  flex: 1;
 }
 
 .breakdown-value {
   color: var(--ulbra-gold-light);
   font-weight: 700;
   font-size: 15px;
-  min-width: 35px;
   text-align: right;
 }
 
 .breakdown-pct {
   font-size: 12px;
-  color: var(--fg-muted);
-  font-weight: 500;
-  min-width: 40px;
+  color: var(--ulbra-gold-light);
+  font-weight: 600;
   text-align: right;
+  margin-left: 2px;
 }
 
 /* Feed Section */
