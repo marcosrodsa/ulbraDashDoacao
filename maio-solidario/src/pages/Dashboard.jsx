@@ -812,9 +812,9 @@ export default function DashboardPage() {
               </thead>
               <tbody>
                 {ranking
-                  .slice((rankingPage - 1) * 8, rankingPage * 8)
+                  .slice((rankingPage - 1) * 5, rankingPage * 5)
                   .map((unit, idx) => {
-                    const absoluteIdx = (rankingPage - 1) * 8 + idx
+                    const absoluteIdx = (rankingPage - 1) * 5 + idx
                     const isExpanded = expandedUnit === unit.nome
                     const unidadeDoacoes = filteredDoacoes.filter(d => d.unidade === unit.nome)
                     const breakdown = {
@@ -891,11 +891,11 @@ export default function DashboardPage() {
               ← Anterior
             </button>
             <span className="pagination-info">
-              Página {rankingPage} de {Math.ceil(ranking.length / 8)}
+              Página {rankingPage} de {Math.ceil(ranking.length / 5)}
             </span>
             <button
               onClick={() => setRankingPage(rankingPage + 1)}
-              disabled={rankingPage >= Math.ceil(ranking.length / 8)}
+              disabled={rankingPage >= Math.ceil(ranking.length / 5)}
               className="pagination-btn"
             >
               Próxima →
