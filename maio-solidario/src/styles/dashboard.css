@@ -347,7 +347,7 @@
 
 .echarts-container {
   width: 100%;
-  height: 520px;
+  height: 420px;
   flex: 1;
 }
 
@@ -1274,50 +1274,67 @@ tr:hover {
   }
 
   .filter-row {
-    flex-direction: column;
-    gap: 14px;
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
 
   .filter-row:first-child {
-    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+    align-items: flex-end;
+  }
+
+  .filter-row:first-child .filter-group:nth-child(3) {
+    grid-column: 1;
   }
 
   .filter-group {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
 
   .filter-select,
   .filter-date {
     width: 100%;
     padding: 10px 12px;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .filter-group label {
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: 600;
   }
 
   .filter-label {
+    grid-column: 1 / -1;
     width: 100%;
-    display: block;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 600;
   }
 
   .filter-chips {
+    grid-column: 1 / -1;
+    display: flex;
     gap: 6px;
-    width: 100%;
+    flex-wrap: wrap;
   }
 
   .chip {
     font-size: 12px;
-    padding: 8px 14px;
-    flex: 0 1 auto;
+    padding: 8px 12px;
+  }
+
+  .filter-row:last-child {
+    grid-template-columns: 1fr 1fr;
   }
 
   .chip-reset,
   .refresh-filter-btn {
-    margin-top: 8px;
+    padding: 10px 16px;
+    font-size: 14px;
+    height: 42px;
   }
 
   .kpi-grid {
