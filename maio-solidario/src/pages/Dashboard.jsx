@@ -662,7 +662,7 @@ export default function DashboardPage() {
         <div className="container">
           <div className="filter-row">
             <div className="filter-group">
-              <label>Unity:</label>
+              <label>Unidade:</label>
               <select
                 value={filters.unidade}
                 onChange={(e) => setFilters(f => ({ ...f, unidade: e.target.value }))}

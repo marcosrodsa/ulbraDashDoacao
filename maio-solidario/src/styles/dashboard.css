@@ -1267,15 +1267,11 @@ tr:hover {
   }
 
   .filter-group {
-    flex: 0 1 calc(50% - 4px) !important;
+    flex: 0 1 100% !important;
     display: flex !important;
     flex-direction: row !important;
-    gap: 4px !important;
+    gap: 6px !important;
     align-items: center !important;
-  }
-
-  .filter-group:nth-child(3) {
-    flex: 0 1 100% !important;
   }
 
   .filter-select,
