@@ -84,7 +84,7 @@ export default function CadastroPage() {
     try {
       const result = await updateMeta(parseInt(metaValue))
       if (result.success) {
-        setMetaSaveMessage('✓ Meta atualizada com sucesso!')
+        setMetaSaveMessage(`✅ Meta atualizada para ${metaValue}`)
         setMetaSaveType('success')
       } else {
         setMetaSaveMessage('Erro ao atualizar meta: ' + result.error)
