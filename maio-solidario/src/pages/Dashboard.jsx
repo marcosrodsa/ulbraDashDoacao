@@ -116,6 +116,7 @@ export default function DashboardPage() {
   const [composicaoView, setComposicaoView] = useState('stacked') // 'stacked' ou 'grouped'
   const [contextExpanded, setContextExpanded] = useState(false) // contexto colapsável
   const [auditPage, setAuditPage] = useState(1) // paginação tabela auditoria
+  const [rankingPage, setRankingPage] = useState(1) // paginação tabela ranking
 
   // Dados do Supabase
   const [doacoesDB, setDoacoesDB] = useState([])
@@ -810,71 +811,95 @@ export default function DashboardPage() {
                 </tr>
               </thead>
               <tbody>
-                {ranking.map((unit, idx) => {
-                  const isExpanded = expandedUnit === unit.nome
-                  const unidadeDoacoes = filteredDoacoes.filter(d => d.unidade === unit.nome)
-                  const breakdown = {
-                    alimentos: unidadeDoacoes.filter(d => d.categoria === 'alimentos').reduce((s, d) => s + d.quantidade, 0),
-                    higiene: unidadeDoacoes.filter(d => d.categoria === 'higiene').reduce((s, d) => s + d.quantidade, 0),
-                    vestuario: unidadeDoacoes.filter(d => d.categoria === 'vestuario').reduce((s, d) => s + d.quantidade, 0),
-                    pet: unidadeDoacoes.filter(d => d.categoria === 'pet').reduce((s, d) => s + d.quantidade, 0),
-                  }
+                {ranking
+                  .slice((rankingPage - 1) * 8, rankingPage * 8)
+                  .map((unit, idx) => {
+                    const absoluteIdx = (rankingPage - 1) * 8 + idx
+                    const isExpanded = expandedUnit === unit.nome
+                    const unidadeDoacoes = filteredDoacoes.filter(d => d.unidade === unit.nome)
+                    const breakdown = {
+                      alimentos: unidadeDoacoes.filter(d => d.categoria === 'alimentos').reduce((s, d) => s + d.quantidade, 0),
+                      higiene: unidadeDoacoes.filter(d => d.categoria === 'higiene').reduce((s, d) => s + d.quantidade, 0),
+                      vestuario: unidadeDoacoes.filter(d => d.categoria === 'vestuario').reduce((s, d) => s + d.quantidade, 0),
+                      pet: unidadeDoacoes.filter(d => d.categoria === 'pet').reduce((s, d) => s + d.quantidade, 0),
+                    }
 
-                  return (
-                    <>
-                      <tr key={unit.nome} onClick={() => setExpandedUnit(isExpanded ? null : unit.nome)} style={{ cursor: 'pointer' }}>
-                        <td className="pos">
-                          <span className="posicao-badge">{idx + 1}º</span>
-                        </td>
-                        <td className="nome">{unit.nome}</td>
-                        <td className="total">
-                          <strong>{unit.registros}</strong> doação{unit.registros !== 1 ? 's' : ''}
-                        </td>
-                        <td className="categoria">
-                          <span className="categoria-badge">
-                            {(() => {
-                              const Icon = CATEGORIAS[unit.categoria]?.Icon
-                              return Icon ? <Icon /> : null
-                            })()}
-                            {CATEGORIAS[unit.categoria]?.label}
-                          </span>
-                        </td>
-                      </tr>
-                      {isExpanded && (
-                        <tr className="expanded-row">
-                          <td colSpan="4">
-                            <div className="breakdown-container">
-                              <div className="breakdown-title">{unit.nome} - Detalhamento</div>
-                              <div className="breakdown-items">
-                                {[
-                                  { nome: 'Alimentos', valor: breakdown.alimentos, cor: '#cca269' },
-                                  { nome: 'Vestuário', valor: breakdown.vestuario, cor: '#a89e8b' },
-                                  { nome: 'Higiene & Limpeza', valor: breakdown.higiene, cor: '#91baa3' },
-                                  { nome: 'Pet/Ração', valor: breakdown.pet, cor: '#66563d' },
-                                ]
-                                  .filter(item => item.valor > 0)
-                                  .sort((a, b) => b.valor - a.valor)
-                                  .map(item => {
-                                    const pct = unit.total > 0 ? Math.round((item.valor / unit.total) * 100) : 0
-                                    return (
-                                      <div key={item.nome} className="breakdown-item">
-                                        <span className="breakdown-dot" style={{ color: item.cor }}>●</span>
-                                        <span className="breakdown-name">{item.nome}:</span>
-                                        <span className="breakdown-value">{item.valor}</span>
-                                        <span className="breakdown-pct">({pct}%)</span>
-                                      </div>
-                                    )
-                                  })}
-                              </div>
-                            </div>
+                    return (
+                      <>
+                        <tr key={unit.nome} onClick={() => setExpandedUnit(isExpanded ? null : unit.nome)} style={{ cursor: 'pointer' }}>
+                          <td className="pos">
+                            <span className="posicao-badge">{absoluteIdx + 1}º</span>
+                          </td>
+                          <td className="nome">{unit.nome}</td>
+                          <td className="total">
+                            <strong>{unit.registros}</strong> doação{unit.registros !== 1 ? 's' : ''}
+                          </td>
+                          <td className="categoria">
+                            <span className="categoria-badge">
+                              {(() => {
+                                const Icon = CATEGORIAS[unit.categoria]?.Icon
+                                return Icon ? <Icon /> : null
+                              })()}
+                              {CATEGORIAS[unit.categoria]?.label}
+                            </span>
                           </td>
                         </tr>
-                      )}
-                    </>
-                  )
-                })}
+                        {isExpanded && (
+                          <tr className="expanded-row">
+                            <td colSpan="4">
+                              <div className="breakdown-container">
+                                <div className="breakdown-title">{unit.nome} - Detalhamento</div>
+                                <div className="breakdown-items">
+                                  {[
+                                    { nome: 'Alimentos', valor: breakdown.alimentos, cor: '#cca269' },
+                                    { nome: 'Vestuário', valor: breakdown.vestuario, cor: '#a89e8b' },
+                                    { nome: 'Higiene & Limpeza', valor: breakdown.higiene, cor: '#91baa3' },
+                                    { nome: 'Pet/Ração', valor: breakdown.pet, cor: '#66563d' },
+                                  ]
+                                    .filter(item => item.valor > 0)
+                                    .sort((a, b) => b.valor - a.valor)
+                                    .map(item => {
+                                      const pct = unit.total > 0 ? Math.round((item.valor / unit.total) * 100) : 0
+                                      return (
+                                        <div key={item.nome} className="breakdown-item">
+                                          <span className="breakdown-dot" style={{ color: item.cor }}>●</span>
+                                          <span className="breakdown-name">{item.nome}:</span>
+                                          <span className="breakdown-value">{item.valor}</span>
+                                          <span className="breakdown-pct">({pct}%)</span>
+                                        </div>
+                                      )
+                                    })}
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        )}
+                      </>
+                    )
+                  })}
               </tbody>
             </table>
+          </div>
+
+          {/* Paginação */}
+          <div className="pagination">
+            <button
+              onClick={() => setRankingPage(Math.max(1, rankingPage - 1))}
+              disabled={rankingPage === 1}
+              className="pagination-btn"
+            >
+              ← Anterior
+            </button>
+            <span className="pagination-info">
+              Página {rankingPage} de {Math.ceil(ranking.length / 8)}
+            </span>
+            <button
+              onClick={() => setRankingPage(rankingPage + 1)}
+              disabled={rankingPage >= Math.ceil(ranking.length / 8)}
+              className="pagination-btn"
+            >
+              Próxima →
+            </button>
           </div>
         </div>
       </section>
