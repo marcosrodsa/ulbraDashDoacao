@@ -1,7 +1,7 @@
 import { useEffect, useRef, useMemo } from 'react'
 import * as echarts from 'echarts'
 
-export default function Heatmap({ doacoes, unidades }) {
+export default function Heatmap({ doacoes }) {
   const chartRef = useRef(null)
   const chartInstance = useRef(null)
 
