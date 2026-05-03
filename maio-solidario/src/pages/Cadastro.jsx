@@ -1,0 +1,214 @@
+import { useState, useEffect } from 'react'
+import { IconFood, IconCleanliness, IconApparel, IconPetCare } from '../components/FontAwesomeIcons'
+import Toast from '../components/Toast'
+import ulbraLogo from '../assets/ulbra_logo.png'
+import { supabase } from '../lib/supabaseClient'
+import '../styles/cadastro.css'
+import '../styles/icons.css'
+
+const CATEGORIAS = [
+  { id: 'alimentos', Icon: IconFood, label: 'Alimentos', unidade: 'kg' },
+  { id: 'higiene', Icon: IconCleanliness, label: 'Higiene & Limpeza', unidade: 'unidades' },
+  { id: 'vestuario', Icon: IconApparel, label: 'Vestuário', unidade: 'peças' },
+  { id: 'pet', Icon: IconPetCare, label: 'Pet/Ração', unidade: 'kg' },
+]
+
+export default function CadastroPage() {
+  const [formData, setFormData] = useState({
+    unidade_id: '',
+    categoria: '',
+    quantidade: '',
+    descricao: '',
+    data: new Date().toISOString().split('T')[0],
+  })
+  const [toastMessage, setToastMessage] = useState('')
+  const [toastType, setToastType] = useState('')
+  const [unidades, setUnidades] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  // Buscar unidades do Supabase
+  useEffect(() => {
+    const fetchUnidades = async () => {
+      try {
+        const { data, error: err } = await supabase
+          .from('units')
+          .select('*')
+          .order('name')
+        if (err) throw err
+        setUnidades(data || [])
+      } catch (error) {
+        console.error('Erro ao buscar unidades:', error)
+      }
+    }
+    fetchUnidades()
+  }, [])
+
+  const categoriaAtual = CATEGORIAS.find(c => c.id === formData.categoria)
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    // Validação
+    if (!formData.unidade_id || !formData.categoria || !formData.quantidade) {
+      setToastMessage('Por favor, preencha todos os campos obrigatórios')
+      setToastType('error')
+      return
+    }
+
+    if (isNaN(formData.quantidade) || formData.quantidade <= 0) {
+      setToastMessage('Quantidade deve ser um número maior que zero')
+      setToastType('error')
+      return
+    }
+
+    // Salvar no Supabase
+    setLoading(true)
+    try {
+      const { error: err } = await supabase.from('donations').insert([
+        {
+          unit_id: formData.unidade_id,
+          category: formData.categoria,
+          quantity: parseInt(formData.quantidade),
+          description: formData.descricao,
+          donation_date: formData.data,
+        }
+      ])
+
+      if (err) throw err
+
+      setToastMessage('✓ Doação registrada com sucesso! Seu impacto já está no painel.')
+      setToastType('success')
+      setFormData({
+        unidade_id: '',
+        categoria: '',
+        quantidade: '',
+        descricao: '',
+        data: new Date().toISOString().split('T')[0],
+      })
+    } catch (error) {
+      setToastMessage('Erro ao registrar doação: ' + error.message)
+      setToastType('error')
+      console.error('Erro:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="cadastro-container">
+      <div className="cadastro-wrapper">
+        <header className="cadastro-header">
+          <img src={ulbraLogo} alt="ULBRA Logo" className="cadastro-logo" />
+          <h1>MAIO SOLIDÁRIO</h1>
+          <p className="slogan">Toda a Rede Ulbra em uma só corrente</p>
+        </header>
+
+        <div className="form-section">
+          <h2>📝 Registre uma doação</h2>
+          <p className="form-subtitle">Seu impacto é registrado em tempo real no painel da campanha.</p>
+
+          <form onSubmit={handleSubmit} className="cadastro-form">
+            {/* Unidade */}
+            <div className="form-group">
+              <label htmlFor="unidade_id">Qual é a unidade? *</label>
+              <select
+                id="unidade_id"
+                name="unidade_id"
+                value={formData.unidade_id}
+                onChange={handleChange}
+                disabled={loading}
+              >
+                <option value="">Selecione uma unidade</option>
+                {unidades.map(u => (
+                  <option key={u.id} value={u.id}>{u.name}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Categoria */}
+            <div className="form-group">
+              <label>Qual categoria? *</label>
+              <div className="categoria-buttons">
+                {CATEGORIAS.map(cat => {
+                  const Icon = cat.Icon
+                  return (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      className={`categoria-btn ${formData.categoria === cat.id ? 'active' : ''}`}
+                      onClick={() => setFormData(prev => ({ ...prev, categoria: cat.id }))}
+                    >
+                      <span className="categoria-icon"><Icon /></span>
+                      <span className="label">{cat.label}</span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* Quantidade */}
+            <div className="form-group">
+              <label htmlFor="quantidade">
+                Quantidade {categoriaAtual && `(${categoriaAtual.unidade})`} *
+              </label>
+              <input
+                type="number"
+                id="quantidade"
+                name="quantidade"
+                value={formData.quantidade}
+                onChange={handleChange}
+                placeholder="Ex: 50"
+                step="0.01"
+                min="0"
+              />
+            </div>
+
+            {/* Data */}
+            <div className="form-group">
+              <label htmlFor="data">Data da doação</label>
+              <input
+                type="date"
+                id="data"
+                name="data"
+                value={formData.data}
+                onChange={handleChange}
+              />
+            </div>
+
+            {/* Descrição */}
+            <div className="form-group">
+              <label htmlFor="descricao">Descrição (opcional)</label>
+              <textarea
+                id="descricao"
+                name="descricao"
+                value={formData.descricao}
+                onChange={handleChange}
+                placeholder="Ex: Arroz 5kg, 10 kits de higiene..."
+                rows="3"
+              />
+            </div>
+
+            <button type="submit" className="btn-submit" disabled={loading}>
+              {loading ? 'Registrando...' : 'Registrar Doação'}
+            </button>
+          </form>
+        </div>
+
+        <footer className="cadastro-footer">
+          <p>Cada doação registrada neste painel chegará na mesa de uma família.</p>
+        </footer>
+      </div>
+      <Toast
+        type={toastType}
+        message={toastMessage}
+        onClose={() => setToastMessage('')}
+        duration={5000}
+      />
+    </div>
+  )
+}
