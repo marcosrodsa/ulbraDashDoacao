@@ -1310,30 +1310,48 @@ tr:hover {
   }
 
   .filter-row:last-child {
-    display: grid !important;
-    grid-template-columns: 80px 1fr 1fr !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
     gap: 10px !important;
     width: 100% !important;
-    align-items: flex-start;
+  }
+
+  .filter-row:last-child .filter-label,
+  .filter-row:last-child .filter-chips {
+    flex-basis: 100%;
   }
 
   .filter-row:last-child .filter-label {
-    grid-column: 1;
-    margin: 0;
     font-size: 11px;
-    text-align: right;
-    padding-right: 12px;
+    text-align: left;
+    margin: 0;
+    color: var(--fg-muted);
   }
 
   .filter-row:last-child .filter-chips {
-    grid-column: 2 / -1;
+    width: 100%;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 0;
+  }
+
+  .filter-row:last-child .chip-reset,
+  .filter-row:last-child .refresh-filter-btn {
+    flex-basis: auto;
+    width: auto;
+    height: 42px;
+    padding: 10px 16px;
+    font-size: 13px;
+    box-sizing: border-box;
   }
 
   .chip-reset {
     padding: 10px 16px;
     font-size: 13px;
     height: 42px;
-    width: 100%;
+    width: auto;
     box-sizing: border-box;
   }
 
@@ -1341,7 +1359,7 @@ tr:hover {
     padding: 10px 16px;
     font-size: 13px;
     height: 42px;
-    width: 100%;
+    width: auto;
     box-sizing: border-box;
   }
 
