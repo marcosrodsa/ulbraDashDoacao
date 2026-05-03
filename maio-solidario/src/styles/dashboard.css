@@ -1024,6 +1024,10 @@ tr:hover {
   margin-bottom: 16px;
 }
 
+.filter-row:first-child {
+  align-items: flex-end;
+}
+
 .filter-row:last-child {
   margin-bottom: 0;
 }
@@ -1243,20 +1247,77 @@ tr:hover {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  .filter-bar {
+    padding: 20px;
+  }
+
   .filter-row {
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    width: 100%;
   }
 
   .filter-select,
   .filter-date {
     width: 100%;
   }
+}
+
+@media (max-width: 480px) {
+  .filter-bar {
+    padding: 16px;
+  }
+
+  .filter-row {
+    flex-direction: column;
+    gap: 14px;
+    align-items: stretch;
+  }
+
+  .filter-row:first-child {
+    gap: 12px;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+
+  .filter-select,
+  .filter-date {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .filter-group label {
+    font-size: 12px;
+  }
+
+  .filter-label {
+    width: 100%;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .filter-chips {
+    gap: 6px;
+    width: 100%;
+  }
 
   .chip {
     font-size: 12px;
-    padding: 5px 10px;
+    padding: 8px 14px;
+    flex: 0 1 auto;
+  }
+
+  .chip-reset,
+  .refresh-filter-btn {
+    margin-top: 8px;
   }
 
   .kpi-grid {
