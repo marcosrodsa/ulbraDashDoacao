@@ -1310,40 +1310,41 @@ tr:hover {
   }
 
   .filter-row:last-child {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 12px !important;
+    display: block !important;
     width: 100% !important;
+    text-align: center;
   }
 
   .filter-row:last-child .filter-label {
-    flex-basis: 100%;
+    display: block !important;
     width: 100%;
     font-size: 11px;
     text-align: left;
-    margin: 0;
+    margin: 0 0 12px 0;
     color: var(--fg-muted);
   }
 
   .filter-row:last-child .filter-chips {
-    flex-basis: 100%;
+    display: block !important;
     width: 100%;
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin: 0;
+    margin: 0 0 12px 0;
+  }
+
+  .filter-row:last-child .filter-chips button {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
   }
 
   .filter-row:last-child .chip-reset,
   .filter-row:last-child .refresh-filter-btn {
-    flex-basis: auto !important;
-    flex-shrink: 0 !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
     height: 42px !important;
     padding: 10px 16px !important;
     font-size: 13px !important;
     box-sizing: border-box !important;
-    display: inline-block !important;
+    margin: 0 6px;
   }
 
   .chip-reset {
