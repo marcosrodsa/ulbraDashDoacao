@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo, Fragment } from 'react'
 import * as echarts from 'echarts'
 import ulbraLogo from '../assets/ulbra_logo.png'
 import { IconFood, IconCleanliness, IconApparel, IconPetCare, IconChartColumn, IconTrophy, IconRankingStar, IconClipboardList, IconBoxesStacked } from '../components/FontAwesomeIcons'
@@ -835,7 +835,7 @@ export default function DashboardPage() {
                     }
 
                     return (
-                      <React.Fragment key={unit.nome}>
+                      <Fragment key={unit.nome}>
                         <tr onClick={() => setExpandedUnit(isExpanded ? null : unit.nome)} style={{ cursor: 'pointer' }}>
                           <td className="pos">
                             <span className="posicao-badge">{absoluteIdx + 1}º</span>
@@ -884,7 +884,7 @@ export default function DashboardPage() {
                             </td>
                           </tr>
                         )}
-                      </React.Fragment>
+                      </Fragment>
                     )
                   })}
               </tbody>
