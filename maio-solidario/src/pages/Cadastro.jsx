@@ -269,14 +269,14 @@ export default function CadastroPage() {
                       className="config-input"
                       value={metaValue}
                       onChange={handleMetaChange}
-                      disabled={metaSaving}
+                      disabled={metaSaving || metaLoading}
                       min="1"
                       placeholder="Ex: 500"
                     />
                     <span className="config-unit">doações</span>
                   </div>
-                  <button type="submit" className="config-button" disabled={metaSaving}>
-                    {metaSaving ? 'Salvando...' : 'Salvar'}
+                  <button type="submit" className="config-button" disabled={metaSaving || metaLoading}>
+                    {metaSaving ? 'Salvando...' : metaLoading ? 'Carregando...' : 'Salvar'}
                   </button>
                 </>
               )}

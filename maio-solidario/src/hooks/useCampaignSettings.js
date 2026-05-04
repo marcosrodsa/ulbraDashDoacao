@@ -42,6 +42,10 @@ export function useCampaignSettings() {
 
   const updateMeta = async (newMeta) => {
     try {
+      if (!settings.id) {
+        throw new Error('Settings not loaded yet. Please wait...')
+      }
+
       const { error: err } = await supabase
         .from('campaign_settings')
         .update({ meta_doacoes: newMeta, updated_at: new Date().toISOString() })
