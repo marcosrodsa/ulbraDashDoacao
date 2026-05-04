@@ -24,8 +24,12 @@ export function useCampaignSettings() {
         .eq('campaign_name', 'Maio Solidário 2026')
         .single()
 
-      if (err) throw err
+      if (err) {
+        console.error('Fetch error:', err)
+        throw err
+      }
 
+      console.log('Fetched settings:', data)
       setSettings({
         id: data.id,
         meta_doacoes: data.meta_doacoes,
