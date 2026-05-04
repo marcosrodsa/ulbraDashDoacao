@@ -1010,7 +1010,17 @@ export default function DashboardPage() {
                           return `${day}/${month}/${year}`
                         })()}
                       </td>
-                      <td className="hora">{doacao.timestamp}</td>
+                      <td className="hora">
+                        {(() => {
+                          const dateUTC = new Date(`${doacao.data}T${doacao.timestamp}Z`)
+                          const timeBrasilia = dateUTC.toLocaleString('pt-BR', {
+                            timeZone: 'America/Sao_Paulo',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })
+                          return timeBrasilia
+                        })()}
+                      </td>
                       <td className="unidade">{doacao.unidade}</td>
                       <td className="categoria">
                         <span className="cat-badge" style={{ borderColor: CATEGORIAS[doacao.categoria]?.color }}>
