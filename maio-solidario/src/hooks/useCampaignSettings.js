@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabaseClient'
 
 export function useCampaignSettings() {
   const [settings, setSettings] = useState({
+    id: null,
     meta_doacoes: 500,
     data_inicio: new Date().toISOString().split('T')[0],
     data_fim: new Date(Date.now() + 31 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
@@ -19,14 +20,14 @@ export function useCampaignSettings() {
       setLoading(true)
       const { data, error: err } = await supabase
         .from('campaign_settings')
-        .select('meta_doacoes, data_inicio, data_fim')
-        .order('created_at', { ascending: false })
-        .limit(1)
+        .select('id, meta_doacoes, data_inicio, data_fim')
+        .eq('campaign_name', 'Maio Solidário 2026')
         .single()
 
       if (err) throw err
 
       setSettings({
+        id: data.id,
         meta_doacoes: data.meta_doacoes,
         data_inicio: data.data_inicio,
         data_fim: data.data_fim,
@@ -44,7 +45,7 @@ export function useCampaignSettings() {
       const { error: err } = await supabase
         .from('campaign_settings')
         .update({ meta_doacoes: newMeta, updated_at: new Date().toISOString() })
-        .eq('campaign_name', 'Maio Solidário 2026')
+        .eq('id', settings.id)
 
       if (err) throw err
 
