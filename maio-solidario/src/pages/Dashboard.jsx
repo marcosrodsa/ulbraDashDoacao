@@ -796,7 +796,14 @@ export default function DashboardPage() {
                 <span className="alert-sep">•</span>
                 <span className="alert-text">Faltam ~{settings.meta_doacoes - filteredDoacoes.length}</span>
                 <span className="alert-sep">•</span>
-                <span className="alert-text">15 dias restantes</span>
+                <span className="alert-text">
+                  {(() => {
+                    const hoje = new Date()
+                    const fim = new Date(settings.data_fim)
+                    const diasRestantes = Math.ceil((fim - hoje) / (1000 * 60 * 60 * 24))
+                    return `${Math.max(diasRestantes, 0)} dias restantes`
+                  })()}
+                </span>
               </div>
               <button
                 onClick={() => {
