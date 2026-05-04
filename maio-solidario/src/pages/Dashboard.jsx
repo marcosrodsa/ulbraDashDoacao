@@ -801,7 +801,8 @@ export default function DashboardPage() {
                     // Get current date in São Paulo timezone
                     const hoje = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
                     const hojeDate = new Date(hoje)
-                    const fim = new Date(settings.data_fim)
+                    // Campaign ends on May 31, 2026
+                    const fim = new Date('2026-05-31')
                     const diasRestantes = Math.ceil((fim - hojeDate) / (1000 * 60 * 60 * 24))
                     return `${Math.max(diasRestantes, 0)} dias restantes`
                   })()}
