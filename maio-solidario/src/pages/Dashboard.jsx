@@ -798,9 +798,11 @@ export default function DashboardPage() {
                 <span className="alert-sep">•</span>
                 <span className="alert-text">
                   {(() => {
-                    const hoje = new Date()
+                    // Get current date in São Paulo timezone
+                    const hoje = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
+                    const hojeDate = new Date(hoje)
                     const fim = new Date(settings.data_fim)
-                    const diasRestantes = Math.ceil((fim - hoje) / (1000 * 60 * 60 * 24))
+                    const diasRestantes = Math.ceil((fim - hojeDate) / (1000 * 60 * 60 * 24))
                     return `${Math.max(diasRestantes, 0)} dias restantes`
                   })()}
                 </span>
