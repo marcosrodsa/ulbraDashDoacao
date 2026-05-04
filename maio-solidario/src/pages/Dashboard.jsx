@@ -798,12 +798,21 @@ export default function DashboardPage() {
                 <span className="alert-sep">•</span>
                 <span className="alert-text">
                   {(() => {
-                    // Get current date in São Paulo timezone
-                    const hoje = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
-                    const hojeDate = new Date(hoje)
-                    // Campaign ends on May 31, 2026
-                    const fim = new Date('2026-05-31')
-                    const diasRestantes = Math.ceil((fim - hojeDate) / (1000 * 60 * 60 * 24))
+                    // Get current date in São Paulo timezone as YYYY-MM-DD
+                    const hoje = new Date()
+                    const hojeStr = new Date(hoje.getTime() - (hoje.getTimezoneOffset() * 60000))
+                      .toISOString()
+                      .split('T')[0]
+
+                    // Parse as numbers for comparison
+                    const [hojeYear, hojeMonth, hojeDay] = hojeStr.split('-').map(Number)
+                    const fimDate = new Date(2026, 4, 31) // May 31, 2026 (month is 0-indexed)
+
+                    // Calculate remaining days from today to May 31
+                    const hoje_ms = new Date(hojeYear, hojeMonth - 1, hojeDay).getTime()
+                    const fim_ms = fimDate.getTime()
+                    const diasRestantes = Math.ceil((fim_ms - hoje_ms) / (1000 * 60 * 60 * 24))
+
                     return `${Math.max(diasRestantes, 0)} dias restantes`
                   })()}
                 </span>
