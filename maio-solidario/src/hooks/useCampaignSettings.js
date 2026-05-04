@@ -17,6 +17,7 @@ export function useCampaignSettings() {
 
   const fetchSettings = async () => {
     try {
+      console.log('🔍 Starting fetchSettings...')
       setLoading(true)
       const { data, error: err } = await supabase
         .from('campaign_settings')
@@ -24,28 +25,34 @@ export function useCampaignSettings() {
         .order('created_at', { ascending: false })
         .limit(1)
 
+      console.log('📦 Raw response - data:', data, 'error:', err)
+
       if (err) {
-        console.error('Fetch error:', err)
+        console.error('❌ Fetch error:', err)
         throw err
       }
 
       if (!data || data.length === 0) {
+        console.error('❌ No records found')
         throw new Error('No campaign settings found in database')
       }
 
-      const settings = data[0]
-      console.log('Fetched settings:', settings)
+      const fetchedSettings = data[0]
+      console.log('✅ Fetched settings:', fetchedSettings)
+      console.log('✅ Setting ID:', fetchedSettings.id)
+
       setSettings({
-        id: settings.id,
-        meta_doacoes: settings.meta_doacoes,
-        data_inicio: settings.data_inicio,
-        data_fim: settings.data_fim,
+        id: fetchedSettings.id,
+        meta_doacoes: fetchedSettings.meta_doacoes,
+        data_inicio: fetchedSettings.data_inicio,
+        data_fim: fetchedSettings.data_fim,
       })
     } catch (err) {
-      console.error('Error fetching campaign settings:', err)
+      console.error('❌ Error fetching campaign settings:', err)
       setError(err.message)
     } finally {
       setLoading(false)
+      console.log('✅ fetchSettings complete')
     }
   }
 
