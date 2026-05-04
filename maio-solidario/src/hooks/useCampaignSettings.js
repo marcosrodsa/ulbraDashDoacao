@@ -21,20 +21,25 @@ export function useCampaignSettings() {
       const { data, error: err } = await supabase
         .from('campaign_settings')
         .select('id, meta_doacoes, data_inicio, data_fim')
-        .eq('campaign_name', 'Maio Solidário 2026')
-        .single()
+        .order('created_at', { ascending: false })
+        .limit(1)
 
       if (err) {
         console.error('Fetch error:', err)
         throw err
       }
 
-      console.log('Fetched settings:', data)
+      if (!data || data.length === 0) {
+        throw new Error('No campaign settings found in database')
+      }
+
+      const settings = data[0]
+      console.log('Fetched settings:', settings)
       setSettings({
-        id: data.id,
-        meta_doacoes: data.meta_doacoes,
-        data_inicio: data.data_inicio,
-        data_fim: data.data_fim,
+        id: settings.id,
+        meta_doacoes: settings.meta_doacoes,
+        data_inicio: settings.data_inicio,
+        data_fim: settings.data_fim,
       })
     } catch (err) {
       console.error('Error fetching campaign settings:', err)
