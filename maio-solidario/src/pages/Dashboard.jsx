@@ -3,6 +3,7 @@ import * as echarts from 'echarts'
 import ulbraLogo from '../assets/ulbra_logo.png'
 import { IconFood, IconCleanliness, IconApparel, IconPetCare, IconChartColumn, IconTrophy, IconRankingStar, IconClipboardList, IconBoxesStacked } from '../components/FontAwesomeIcons'
 import { supabase } from '../lib/supabaseClient'
+import { useCampaignSettings } from '../hooks/useCampaignSettings'
 import '../styles/dashboard.css'
 import '../styles/icons.css'
 
@@ -104,6 +105,9 @@ const groupByWeek = (doacoes) => {
 
 
 export default function DashboardPage() {
+  // Configurações da campanha (meta de doações)
+  const { settings } = useCampaignSettings()
+
   // Estado de filtros
   const [filters, setFilters] = useState({
     unidade: '',
@@ -766,7 +770,7 @@ export default function DashboardPage() {
                   </div>
                   <div>
                     <span className="meta-label">Meta:</span>
-                    <strong className="meta-value">500</strong>
+                    <strong className="meta-value">{settings.meta_doacoes}</strong>
                   </div>
                 </div>
               </div>
@@ -774,11 +778,11 @@ export default function DashboardPage() {
                 <div className="progress-bar">
                   <div
                     className="progress-fill"
-                    style={{ width: `${Math.min((filteredDoacoes.length / 500) * 100, 100)}%` }}
+                    style={{ width: `${Math.min((filteredDoacoes.length / settings.meta_doacoes) * 100, 100)}%` }}
                   ></div>
                 </div>
                 <div className="progress-text">
-                  {Math.round((filteredDoacoes.length / 500) * 100)}% da meta
+                  {Math.round((filteredDoacoes.length / settings.meta_doacoes) * 100)}% da meta
                 </div>
               </div>
             </div>
@@ -788,9 +792,9 @@ export default function DashboardPage() {
             <div className="alert-cta-card">
               <div className="alert-line">
                 <span className="alert-icon">⚠️</span>
-                <span className="alert-text">Apenas {Math.round((filteredDoacoes.length / 500) * 100)}% da meta</span>
+                <span className="alert-text">Apenas {Math.round((filteredDoacoes.length / settings.meta_doacoes) * 100)}% da meta</span>
                 <span className="alert-sep">•</span>
-                <span className="alert-text">Faltam ~{500 - filteredDoacoes.length}</span>
+                <span className="alert-text">Faltam ~{settings.meta_doacoes - filteredDoacoes.length}</span>
                 <span className="alert-sep">•</span>
                 <span className="alert-text">15 dias restantes</span>
               </div>
