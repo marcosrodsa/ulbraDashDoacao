@@ -638,9 +638,6 @@ export default function DashboardPage() {
       <section className="contexto-section">
         <div className="container">
           <div className={`contexto-box ${contextExpanded ? 'expanded' : ''}`}>
-            <p>
-              Em maio de 2024, a enchente do Rio Grande do Sul tirou a casa, a comida e o chão de milhares de famílias gaúchas. Dois anos depois, a reconstrução continua.
-            </p>
             {contextExpanded && (
               <>
                 <p>
