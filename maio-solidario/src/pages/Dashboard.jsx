@@ -117,7 +117,6 @@ export default function DashboardPage() {
   })
   const [viewMode, setViewMode] = useState('diario') // 'diario' ou 'semanal'
   const [expandedUnit, setExpandedUnit] = useState(null) // para expandir linha na tabela
-  const [contextExpanded, setContextExpanded] = useState(false) // contexto colapsável
   const [auditPage, setAuditPage] = useState(1) // paginação tabela auditoria
   const [rankingPage, setRankingPage] = useState(1) // paginação tabela ranking
 
@@ -637,26 +636,16 @@ export default function DashboardPage() {
       {/* Contexto */}
       <section className="contexto-section">
         <div className="container">
-          <div className={`contexto-box ${contextExpanded ? 'expanded' : ''}`}>
-            {contextExpanded && (
-              <>
-                <p>
-                  O Maio Solidário 2026 é a campanha nacional de arrecadação da Rede Ulbra. Cada unidade é um ponto de coleta. Cada doação recebida é registrada, somada e entregue a quem ainda precisa.
-                </p>
-                <p>
-                  Este painel existe para monitorar, em tempo real, tudo o que está sendo arrecadado em todas as unidades do país. Aqui você acompanha o volume por categoria, o desempenho de cada unidade e o total da rede.
-                </p>
-                <p>
-                  <strong>Cada quilo, cada peça, cada item registrado neste painel chega na mesa de uma família. É por isso que toda doação importa.</strong>
-                </p>
-              </>
-            )}
-            <button
-              className="contexto-toggle"
-              onClick={() => setContextExpanded(!contextExpanded)}
-            >
-              {contextExpanded ? '↑ Ver menos' : '↓ Ver mais'}
-            </button>
+          <div className="contexto-box">
+            <p>
+              O Maio Solidário 2026 é a campanha nacional de arrecadação da Rede Ulbra. Cada unidade é um ponto de coleta. Cada doação recebida é registrada, somada e entregue a quem ainda precisa.
+            </p>
+            <p>
+              Este painel existe para monitorar, em tempo real, tudo o que está sendo arrecadado em todas as unidades do país. Aqui você acompanha o volume por categoria, o desempenho de cada unidade e o total da rede.
+            </p>
+            <p>
+              <strong>Cada quilo, cada peça, cada item registrado neste painel chega na mesa de uma família. É por isso que toda doação importa.</strong>
+            </p>
           </div>
         </div>
       </section>
