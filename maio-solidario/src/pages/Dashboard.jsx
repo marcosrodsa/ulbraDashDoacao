@@ -403,6 +403,7 @@ export default function DashboardPage() {
               type: 'bar',
               stack: 'total',
               itemStyle: { color: '#cca269' },
+              barMaxWidth: 60,
               z: 4,
             },
             {
@@ -411,6 +412,7 @@ export default function DashboardPage() {
               type: 'bar',
               stack: 'total',
               itemStyle: { color: '#a89e8b' },
+              barMaxWidth: 60,
               z: 3,
             },
             {
@@ -419,6 +421,7 @@ export default function DashboardPage() {
               type: 'bar',
               stack: 'total',
               itemStyle: { color: '#91baa3' },
+              barMaxWidth: 60,
               z: 2,
             },
             {
@@ -427,6 +430,7 @@ export default function DashboardPage() {
               type: 'bar',
               stack: 'total',
               itemStyle: { color: '#66563d' },
+              barMaxWidth: 60,
               z: 1,
             },
           ],
