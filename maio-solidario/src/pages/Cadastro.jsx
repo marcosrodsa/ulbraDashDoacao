@@ -43,7 +43,15 @@ export default function CadastroPage() {
           .select('*')
           .order('name')
         if (err) throw err
-        setUnidades(data || [])
+
+        // Filtrar apenas unidades válidas (remover: Pop, Institucional, Geral, Caxias do Sul, Ultec)
+        const validUnidades = (data || []).filter(u => {
+          const name = u.name?.toLowerCase() || ''
+          const excludedKeywords = ['pop', 'institucional', 'geral', 'caxias do sul', 'ultec']
+          return !excludedKeywords.some(keyword => name.includes(keyword))
+        })
+
+        setUnidades(validUnidades)
       } catch (error) {
         console.error('Erro ao buscar unidades:', error)
       }
