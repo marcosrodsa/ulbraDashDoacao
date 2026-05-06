@@ -194,6 +194,19 @@ export default function DashboardPage() {
   const handleRefresh = async () => {
     setIsRefreshing(true)
     await fetchData()
+    // Force chart update
+    setTimeout(() => {
+      if (totais && Object.keys(totais).length > 0 && ranking.length > 0) {
+        try {
+          updateCharts(totais, ranking, evolucaoData, filteredDoacoes)
+          chartRankingInstance.current?.resize()
+          chartEvolucaoInstance.current?.resize()
+          chartComposicaoInstance.current?.resize()
+        } catch (e) {
+          console.error('Erro ao update charts no refresh:', e)
+        }
+      }
+    }, 100)
     setIsRefreshing(false)
   }
 
