@@ -157,6 +157,13 @@ export default function DashboardPage() {
 
       if (errorUnidades) throw errorUnidades
 
+      // Filtrar apenas unidades válidas (remover: Pop, Institucional, Geral, Caxias do Sul, Ultec)
+      const validUnidades = (unidades || []).filter(u => {
+        const name = u.name?.toLowerCase() || ''
+        const excludedKeywords = ['pop', 'institucional', 'geral', 'caxias do sul', 'ultec']
+        return !excludedKeywords.some(keyword => name.includes(keyword))
+      })
+
       // Transformar dados para o formato esperado
       const doacoesFormatadas = (doacoes || []).map(d => {
         // Usar donation_date como fonte de verdade (data da doação)
@@ -167,7 +174,7 @@ export default function DashboardPage() {
 
         return {
           id: d.id,
-          unidade: unidades?.find(u => u.id === d.unit_id)?.name || 'Unidade desconhecida',
+          unidade: validUnidades?.find(u => u.id === d.unit_id)?.name || 'Unidade desconhecida',
           categoria: d.category,
           quantidade: d.quantity,
           descricao: d.description || '',
@@ -177,7 +184,7 @@ export default function DashboardPage() {
       })
 
       setDoacoesDB(doacoesFormatadas)
-      setUnidadesDB(unidades || [])
+      setUnidadesDB(validUnidades || [])
       setLoading(false)
     } catch (error) {
       console.error('Erro ao buscar dados do Supabase:', error)
