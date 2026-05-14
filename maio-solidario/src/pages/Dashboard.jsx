@@ -113,6 +113,7 @@ export default function DashboardPage() {
   // Estado de filtros
   const [filters, setFilters] = useState({
     unidade: '',
+    tipoUnidade: 'Todos', // 'Todos', 'Escola', 'Superior'
     categoria: '',
     dateFrom: '2026-04-01',
     dateTo: '2026-05-31',
@@ -225,12 +226,20 @@ export default function DashboardPage() {
 
   // Derivar dados filtrados usando useMemo
   const filteredDoacoes = useMemo(() =>
-    doacoesDB.filter(d =>
-      (!filters.unidade || d.unidade === filters.unidade) &&
-      (!filters.categoria || d.categoria === filters.categoria) &&
-      d.data >= filters.dateFrom &&
-      d.data <= filters.dateTo
-    ),
+    doacoesDB.filter(d => {
+      const isCorrectUnit = !filters.unidade || d.unidade === filters.unidade;
+      const isCorrectCategory = !filters.categoria || d.categoria === filters.categoria;
+      const isCorrectDate = d.data >= filters.dateFrom && d.data <= filters.dateTo;
+      
+      let isCorrectType = true;
+      if (filters.tipoUnidade !== 'Todos') {
+        const isEscola = d.unidade.toLowerCase().includes('colégio') || d.unidade.toLowerCase().includes('escola');
+        const type = isEscola ? 'Escola' : 'Superior';
+        isCorrectType = type === filters.tipoUnidade;
+      }
+
+      return isCorrectUnit && isCorrectCategory && isCorrectDate && isCorrectType;
+    }),
     [filters, doacoesDB]
   )
 
@@ -353,7 +362,7 @@ export default function DashboardPage() {
     try {
       // Gráfico 1: Composição por Unidade (Barras empilhadas)
       if (chartComposicaoInstance.current) {
-        const topUnidades = rankingArray.slice(0, 8)
+        const topUnidades = rankingArray.slice(0, 10)
         const composicaoData = topUnidades.map(unit => {
           const unidadeDoacoes = doacoes.filter(d => d.unidade === unit.nome)
           return {
@@ -720,6 +729,31 @@ export default function DashboardPage() {
             </div>
           </div>
 
+
+          <div className="filter-row">
+            <span className="filter-label">Tipo de Unidade:</span>
+            <div className="filter-chips">
+              <button
+                className={`chip ${filters.tipoUnidade === 'Todos' ? 'active' : ''}`}
+                onClick={() => setFilters(f => ({ ...f, tipoUnidade: 'Todos' }))}
+              >
+                Todos
+              </button>
+              <button
+                className={`chip ${filters.tipoUnidade === 'Escola' ? 'active' : ''}`}
+                onClick={() => setFilters(f => ({ ...f, tipoUnidade: 'Escola' }))}
+              >
+                Escolas
+              </button>
+              <button
+                className={`chip ${filters.tipoUnidade === 'Superior' ? 'active' : ''}`}
+                onClick={() => setFilters(f => ({ ...f, tipoUnidade: 'Superior' }))}
+              >
+                Ensino Superior
+              </button>
+            </div>
+          </div>
+
           <div className="filter-row">
             <span className="filter-label">Categoria:</span>
             <div className="filter-chips">
@@ -740,7 +774,7 @@ export default function DashboardPage() {
               ))}
             </div>
             <button
-              onClick={() => setFilters({ unidade: '', categoria: '', dateFrom: '2026-04-01', dateTo: '2026-05-31' })}
+              onClick={() => setFilters({ unidade: '', tipoUnidade: 'Todos', categoria: '', dateFrom: '2026-04-01', dateTo: '2026-05-31' })}
               className="chip chip-reset"
               title="Resetar todos os filtros"
             >
@@ -972,7 +1006,27 @@ export default function DashboardPage() {
           {/* Gráfico - Composição por Unidade (Top 8) */}
           <div className="chart-card chart-card-full">
             <div className="chart-header">
-              <h3><IconChartColumn /> Composição por Unidade (Top 8)</h3>
+              <h3><IconChartColumn /> Composição por Unidade (Top 10)</h3>
+              <div className="chart-toggle">
+                <button
+                  className={`toggle-btn ${filters.tipoUnidade === 'Todos' ? 'active' : ''}`}
+                  onClick={() => setFilters(f => ({ ...f, tipoUnidade: 'Todos' }))}
+                >
+                  Todos
+                </button>
+                <button
+                  className={`toggle-btn ${filters.tipoUnidade === 'Escola' ? 'active' : ''}`}
+                  onClick={() => setFilters(f => ({ ...f, tipoUnidade: 'Escola' }))}
+                >
+                  Escolas
+                </button>
+                <button
+                  className={`toggle-btn ${filters.tipoUnidade === 'Superior' ? 'active' : ''}`}
+                  onClick={() => setFilters(f => ({ ...f, tipoUnidade: 'Superior' }))}
+                >
+                  Ensino Superior
+                </button>
+              </div>
             </div>
             <div ref={chartComposicaoRef} className="echarts-container" style={{ minHeight: '400px', width: '100%' }}></div>
           </div>
