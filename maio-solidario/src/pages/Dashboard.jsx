@@ -787,7 +787,7 @@ export default function DashboardPage() {
                   </div>
                   <div>
                     <span className="meta-label">Meta:</span>
-                    <strong className="meta-value">{settings.meta_doacoes}</strong>
+                    <strong className="meta-value">{Number(settings.meta_doacoes).toLocaleString('pt-BR')}</strong>
                   </div>
                 </div>
               </div>
