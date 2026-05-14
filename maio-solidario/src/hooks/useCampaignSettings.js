@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabaseClient'
 export function useCampaignSettings() {
   const [settings, setSettings] = useState({
     id: null,
-    meta_doacoes: 500,
+    meta_doacoes: 10000,
     data_inicio: new Date().toISOString().split('T')[0],
     data_fim: new Date(Date.now() + 31 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
   })
@@ -33,7 +33,7 @@ export function useCampaignSettings() {
         const campaign = data[0]
         setSettings({
           id: campaign.id,
-          meta_doacoes: campaign.meta_doacoes || 500,
+          meta_doacoes: campaign.meta_doacoes || 10000,
           data_inicio: campaign.data_inicio,
           data_fim: campaign.data_fim,
         })
