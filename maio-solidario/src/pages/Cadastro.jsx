@@ -181,9 +181,10 @@ export default function CadastroPage() {
                 disabled={loading}
               >
                 <option value="">Selecione uma unidade</option>
-                {unidades.map(u => (
-                  <option key={u.id} value={u.id}>{u.name}</option>
-                ))}
+                {unidades.map(u => {
+                  const dName = u.display_name && u.display_name.trim() !== '' ? u.display_name : u.name;
+                  return <option key={u.id} value={u.id}>{dName}</option>
+                })}
               </select>
             </div>
 

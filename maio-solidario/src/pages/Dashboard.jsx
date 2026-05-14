@@ -176,7 +176,11 @@ export default function DashboardPage() {
 
         return {
           id: d.id,
-          unidade: validUnidades?.find(u => u.id === d.unit_id)?.name || 'Unidade desconhecida',
+          unidade: (() => {
+            const unit = validUnidades?.find(u => u.id === d.unit_id);
+            if (!unit) return 'Unidade desconhecida';
+            return unit.display_name && unit.display_name.trim() !== '' ? unit.display_name : unit.name;
+          })(),
           categoria: d.category,
           quantidade: d.quantity,
           descricao: d.description || '',
@@ -688,9 +692,10 @@ export default function DashboardPage() {
                 className="filter-select"
               >
                 <option value="">Todas</option>
-                {unidadesDB.map(u => (
-                  <option key={u.id} value={u.name}>{u.name}</option>
-                ))}
+                {unidadesDB.map(u => {
+                  const dName = u.display_name && u.display_name.trim() !== '' ? u.display_name : u.name;
+                  return <option key={u.id} value={dName}>{dName}</option>
+                })}
               </select>
             </div>
 
