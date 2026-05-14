@@ -282,7 +282,7 @@ export default function CadastroPage() {
                       min="1"
                       placeholder="Ex: 500"
                     />
-                    <span className="config-unit">doações</span>
+                    <span className="config-unit">itens/kg</span>
                   </div>
                   <button type="submit" className="config-button" disabled={metaSaving || metaLoading}>
                     {metaSaving ? 'Salvando...' : metaLoading ? 'Carregando...' : 'Salvar'}

@@ -782,8 +782,8 @@ export default function DashboardPage() {
                 <h3>Meta de Doações</h3>
                 <div className="meta-stats">
                   <div>
-                    <span className="meta-label">Registradas:</span>
-                    <strong className="meta-value">{filteredDoacoes.length}</strong>
+                    <span className="meta-label">Total Arrecadado:</span>
+                    <strong className="meta-value">{totalGeral.toLocaleString('pt-BR')}</strong>
                   </div>
                   <div>
                     <span className="meta-label">Meta:</span>
@@ -795,11 +795,11 @@ export default function DashboardPage() {
                 <div className="progress-bar">
                   <div
                     className="progress-fill"
-                    style={{ width: `${Math.min((filteredDoacoes.length / settings.meta_doacoes) * 100, 100)}%` }}
+                    style={{ width: `${Math.min((totalGeral / settings.meta_doacoes) * 100, 100)}%` }}
                   ></div>
                 </div>
                 <div className="progress-text">
-                  {Math.round((filteredDoacoes.length / settings.meta_doacoes) * 100)}% da meta
+                  {Math.round((totalGeral / settings.meta_doacoes) * 100)}% da meta
                 </div>
               </div>
             </div>
@@ -809,9 +809,9 @@ export default function DashboardPage() {
             <div className="alert-cta-card">
               <div className="alert-line">
                 <span className="alert-icon">⚠️</span>
-                <span className="alert-text">Apenas {Math.round((filteredDoacoes.length / settings.meta_doacoes) * 100)}% da meta</span>
+                <span className="alert-text">Apenas {Math.round((totalGeral / settings.meta_doacoes) * 100)}% da meta</span>
                 <span className="alert-sep">•</span>
-                <span className="alert-text">Faltam ~{settings.meta_doacoes - filteredDoacoes.length}</span>
+                <span className="alert-text">Faltam ~{Math.max(settings.meta_doacoes - totalGeral, 0).toLocaleString('pt-BR')}</span>
                 <span className="alert-sep">•</span>
                 <span className="alert-text">
                   {(() => {
