@@ -117,7 +117,7 @@ export default function DashboardPage() {
     dateFrom: '2026-04-01',
     dateTo: '2026-05-31',
   })
-  const [viewMode, setViewMode] = useState('diario') // 'diario' ou 'semanal'
+  const [viewMode, setViewMode] = useState('semanal') // Apenas 'semanal' agora
   const [expandedUnit, setExpandedUnit] = useState(null) // para expandir linha na tabela
   const [auditPage, setAuditPage] = useState(1) // paginação tabela auditoria
   const [rankingPage, setRankingPage] = useState(1) // paginação tabela ranking
@@ -964,20 +964,7 @@ export default function DashboardPage() {
           <div className="chart-card chart-card-full">
             <div className="chart-header">
               <h3><IconChartColumn /> Evolução da Arrecadação</h3>
-              <div className="chart-toggle">
-                <button
-                  className={`toggle-btn ${viewMode === 'diario' ? 'active' : ''}`}
-                  onClick={() => setViewMode('diario')}
-                >
-                  Por Dia
-                </button>
-                <button
-                  className={`toggle-btn ${viewMode === 'semanal' ? 'active' : ''}`}
-                  onClick={() => setViewMode('semanal')}
-                >
-                  Por Semana
-                </button>
-              </div>
+
             </div>
             <div ref={chartEvolucaoRef} className="echarts-container" style={{ minHeight: '400px', width: '100%' }}></div>
           </div>
