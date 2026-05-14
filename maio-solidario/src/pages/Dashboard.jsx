@@ -100,7 +100,9 @@ const groupByWeek = (doacoes) => {
     byWeek[weekKey][d.categoria] += d.quantidade
     byWeek[weekKey].total += d.quantidade
   })
-  return Object.entries(byWeek).map(([semana, vals]) => ({ semana, ...vals }))
+  return Object.entries(byWeek)
+    .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+    .map(([semana, vals]) => ({ semana, ...vals }))
 }
 
 

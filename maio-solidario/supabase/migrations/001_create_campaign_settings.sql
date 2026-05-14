@@ -4,7 +4,7 @@
 
 CREATE TABLE campaign_settings (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  campaign_name VARCHAR(255) NOT NULL DEFAULT 'Maio Solidário 2026',
+  campaign_name VARCHAR(255) NOT NULL DEFAULT 'Maio Solidário 2026' UNIQUE,
   meta_doacoes INT NOT NULL DEFAULT 500,
   data_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
   data_fim DATE NOT NULL DEFAULT CURRENT_DATE + INTERVAL '31 days',
@@ -13,20 +13,9 @@ CREATE TABLE campaign_settings (
   created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
--- Enable Row Level Security (RLS)
-ALTER TABLE campaign_settings ENABLE ROW LEVEL SECURITY;
-
--- Policy: Allow all authenticated users to READ campaign_settings
-CREATE POLICY "Allow read campaign_settings"
-  ON campaign_settings FOR SELECT
-  TO authenticated
-  USING (true);
-
--- Policy: Allow all authenticated users to UPDATE campaign_settings
-CREATE POLICY "Allow update campaign_settings"
-  ON campaign_settings FOR UPDATE
-  TO authenticated
-  USING (true);
+-- Disable Row Level Security (RLS) - table is public, no sensitive data
+-- All CRUD operations allowed publicly
+ALTER TABLE campaign_settings DISABLE ROW LEVEL SECURITY;
 
 -- Insert default row for initial campaign
 INSERT INTO campaign_settings (campaign_name, meta_doacoes, data_inicio, data_fim)

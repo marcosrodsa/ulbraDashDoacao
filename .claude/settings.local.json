@@ -13,7 +13,11 @@
       "Read(//c/Users/marco/OneDrive/Documents/GitHub/ulbraDashDoacao/maio-solidario/src/styles//**)",
       "Read(//c/Users/marco/OneDrive/Documents/GitHub/ulbraDashDoacao/maio-solidario/src/styles/**)",
       "Read(//c/Users/marco/OneDrive/Documents/GitHub/ulbraDashDoacao/maio-solidario/**)",
-      "Bash(npm test *)"
+      "Bash(npm test *)",
+      "Read(//c/c/Users/marco/OneDrive/Documents/GitHub/ulbraDashDoacao/maio-solidario/**)",
+      "Bash(cat)",
+      "Read(//tmp/**)",
+      "Bash(git commit *)"
     ]
   }
 }
