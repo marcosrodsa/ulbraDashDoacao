@@ -236,10 +236,10 @@ export default function CadastroPage() {
                 onChange={handleChange}
                 required
               >
-                <option value="2026-05-01">Semana 1 (01/05 a 07/05)</option>
-                <option value="2026-05-08">Semana 2 (08/05 a 14/05)</option>
-                <option value="2026-05-15">Semana 3 (15/05 a 21/05)</option>
-                <option value="2026-05-22">Semana 4 (22/05 em diante)</option>
+                <option value="2026-05-01">Semana 1 (01/05 a 10/05)</option>
+                <option value="2026-05-11">Semana 2 (11/05 a 17/05)</option>
+                <option value="2026-05-18">Semana 3 (18/05 a 24/05)</option>
+                <option value="2026-05-25">Semana 4 (25/05 a 31/05)</option>
               </select>
             </div>
 

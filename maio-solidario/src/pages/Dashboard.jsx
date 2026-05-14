@@ -80,10 +80,14 @@ const groupByWeek = (doacoes) => {
     const day = date.getDate()
     
     let weekNum
-    if (day <= 7) weekNum = 1
-    else if (day <= 14) weekNum = 2
-    else if (day <= 21) weekNum = 3
-    else weekNum = 4 // 22 em diante
+    if (day <= 10) weekNum = 1
+    else if (day <= 17) weekNum = 2
+    else if (day <= 21) weekNum = 3 // Ajuste para manter 7 dias se possível, ou 24?
+    // Vamos usar: 1-10 (S1), 11-17 (S2), 18-24 (S3), 25-31 (S4)
+    if (day <= 10) weekNum = 1
+    else if (day <= 17) weekNum = 2
+    else if (day <= 24) weekNum = 3
+    else weekNum = 4
     
     const weekKey = `Semana ${weekNum}`
     if (!byWeek[weekKey]) {
@@ -1053,9 +1057,9 @@ export default function DashboardPage() {
                       <span className="feed-data">
                         {(() => {
                           const day = new Date(doacao.data + 'T00:00:00').getDate()
-                          if (day <= 7) return 'Semana 1'
-                          if (day <= 14) return 'Semana 2'
-                          if (day <= 21) return 'Semana 3'
+                          if (day <= 10) return 'Semana 1'
+                          if (day <= 17) return 'Semana 2'
+                          if (day <= 24) return 'Semana 3'
                           return 'Semana 4'
                         })()}
                       </span>
@@ -1092,9 +1096,9 @@ export default function DashboardPage() {
                       <td className="data">
                         {(() => {
                           const day = new Date(doacao.data + 'T00:00:00').getDate()
-                          if (day <= 7) return 'Semana 1'
-                          if (day <= 14) return 'Semana 2'
-                          if (day <= 21) return 'Semana 3'
+                          if (day <= 10) return 'Semana 1'
+                          if (day <= 17) return 'Semana 2'
+                          if (day <= 24) return 'Semana 3'
                           return 'Semana 4'
                         })()}
                       </td>
