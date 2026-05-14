@@ -72,27 +72,19 @@ const CATEGORIAS = {
   pet: { Icon: IconPetCare, label: 'Pet/Ração', unidade: 'kg', color: '#66563d' },
 }
 
-// Helper: agrupar doações por dia
-const groupByDay = (doacoes) => {
-  const byDay = {}
-  doacoes.forEach(d => {
-    if (!byDay[d.data]) {
-      byDay[d.data] = { alimentos: 0, higiene: 0, vestuario: 0, pet: 0, total: 0 }
-    }
-    byDay[d.data][d.categoria] += d.quantidade
-    byDay[d.data].total += d.quantidade
-  })
-  return Object.entries(byDay)
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([data, vals]) => ({ dia: data, ...vals }))
-}
-
 // Helper: agrupar doações por semana
 const groupByWeek = (doacoes) => {
   const byWeek = {}
   doacoes.forEach(d => {
-    const date = new Date(d.data)
-    const weekNum = Math.ceil((date.getDate() + new Date(date.getFullYear(), date.getMonth(), 1).getDay()) / 7)
+    const date = new Date(d.data + 'T00:00:00')
+    const day = date.getDate()
+    
+    let weekNum
+    if (day <= 7) weekNum = 1
+    else if (day <= 14) weekNum = 2
+    else if (day <= 21) weekNum = 3
+    else weekNum = 4 // 22 em diante
+    
     const weekKey = `Semana ${weekNum}`
     if (!byWeek[weekKey]) {
       byWeek[weekKey] = { alimentos: 0, higiene: 0, vestuario: 0, pet: 0, total: 0 }
@@ -101,9 +93,14 @@ const groupByWeek = (doacoes) => {
     byWeek[weekKey].total += d.quantidade
   })
   return Object.entries(byWeek)
-    .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
-    .map(([semana, vals]) => ({ semana, ...vals }))
+    .sort((a, b) => {
+      const numA = parseInt(a[0].replace('Semana ', ''))
+      const numB = parseInt(b[0].replace('Semana ', ''))
+      return numA - numB
+    })
+    .map(([label, vals]) => ({ label, ...vals }))
 }
+
 
 
 export default function DashboardPage() {
@@ -281,8 +278,8 @@ export default function DashboardPage() {
   )
 
   const calculatedEvolucaoData = useMemo(() =>
-    viewMode === 'diario' ? groupByDay(filteredDoacoes) : groupByWeek(filteredDoacoes),
-    [filteredDoacoes, viewMode]
+    groupByWeek(filteredDoacoes),
+    [filteredDoacoes]
   )
 
   // Atualizar state com dados calculados
@@ -1051,10 +1048,18 @@ export default function DashboardPage() {
                     {' '}
                     <span className="feed-category">{CATEGORIAS[doacao.categoria]?.label}</span>
                   </div>
-                  <div className="feed-meta">
-                    {doacao.descricao && <span className="feed-desc">({doacao.descricao})</span>}
-                    <span className="feed-data">{doacao.data} {doacao.timestamp}</span>
-                  </div>
+                    <div className="feed-meta">
+                      {doacao.descricao && <span className="feed-desc">({doacao.descricao})</span>}
+                      <span className="feed-data">
+                        {(() => {
+                          const day = new Date(doacao.data + 'T00:00:00').getDate()
+                          if (day <= 7) return 'Semana 1'
+                          if (day <= 14) return 'Semana 2'
+                          if (day <= 21) return 'Semana 3'
+                          return 'Semana 4'
+                        })()}
+                      </span>
+                    </div>
                 </div>
               </div>
             )
@@ -1071,8 +1076,7 @@ export default function DashboardPage() {
             <table className="audit-table">
               <thead>
                 <tr>
-                  <th>Data</th>
-                  <th>Hora</th>
+                  <th>Semana</th>
                   <th>Unidade</th>
                   <th>Categoria</th>
                   <th>Quantidade</th>
@@ -1087,19 +1091,11 @@ export default function DashboardPage() {
                     <tr key={doacao.id}>
                       <td className="data">
                         {(() => {
-                          const [year, month, day] = doacao.data.split('-')
-                          return `${day}/${month}/${year}`
-                        })()}
-                      </td>
-                      <td className="hora">
-                        {(() => {
-                          const dateUTC = new Date(`${doacao.data}T${doacao.timestamp}Z`)
-                          const timeBrasilia = dateUTC.toLocaleString('pt-BR', {
-                            timeZone: 'America/Sao_Paulo',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                          })
-                          return timeBrasilia
+                          const day = new Date(doacao.data + 'T00:00:00').getDate()
+                          if (day <= 7) return 'Semana 1'
+                          if (day <= 14) return 'Semana 2'
+                          if (day <= 21) return 'Semana 3'
+                          return 'Semana 4'
                         })()}
                       </td>
                       <td className="unidade">{doacao.unidade}</td>

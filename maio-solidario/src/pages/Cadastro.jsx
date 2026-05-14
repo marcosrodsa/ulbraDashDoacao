@@ -20,7 +20,7 @@ export default function CadastroPage() {
     categoria: '',
     quantidade: '',
     descricao: '',
-    data: new Date().toISOString().split('T')[0],
+    data: '2026-05-01',
   })
   const [toastMessage, setToastMessage] = useState('')
   const [toastType, setToastType] = useState('')
@@ -145,7 +145,7 @@ export default function CadastroPage() {
         categoria: '',
         quantidade: '',
         descricao: '',
-        data: new Date().toISOString().split('T')[0],
+        data: '2026-05-01',
       })
     } catch (error) {
       setToastMessage('Erro ao registrar doação: ' + error.message)
@@ -226,16 +226,21 @@ export default function CadastroPage() {
               />
             </div>
 
-            {/* Data */}
+            {/* Semana da Doação */}
             <div className="form-group">
-              <label htmlFor="data">Data da doação</label>
-              <input
-                type="date"
+              <label htmlFor="data">Qual Semana? *</label>
+              <select
                 id="data"
                 name="data"
                 value={formData.data}
                 onChange={handleChange}
-              />
+                required
+              >
+                <option value="2026-05-01">Semana 1 (01/05 a 07/05)</option>
+                <option value="2026-05-08">Semana 2 (08/05 a 14/05)</option>
+                <option value="2026-05-15">Semana 3 (15/05 a 21/05)</option>
+                <option value="2026-05-22">Semana 4 (22/05 em diante)</option>
+              </select>
             </div>
 
             {/* Descrição */}
