@@ -102,7 +102,7 @@ const groupByWeek = (doacoes) => {
       const numB = parseInt(b[0].replace('Semana ', ''))
       return numA - numB
     })
-    .map(([label, vals]) => ({ label, ...vals }))
+    .map(([semana, vals]) => ({ semana, ...vals }))
 }
 
 
