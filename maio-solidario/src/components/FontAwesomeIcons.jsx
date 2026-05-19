@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUtensils, faSprayCan, faShirt, faBone, faChartColumn, faChartPie, faTrophy, faRankingStar, faClipboardList, faBoxesStacked } from '@fortawesome/free-solid-svg-icons'
+import { faUtensils, faSprayCan, faShirt, faBone, faChartColumn, faChartPie, faTrophy, faRankingStar, faClipboardList, faBoxesStacked, faPenRuler, faBox } from '@fortawesome/free-solid-svg-icons'
 
 export function IconFood() {
   return <FontAwesomeIcon icon={faUtensils} />
@@ -15,6 +15,14 @@ export function IconApparel() {
 
 export function IconPetCare() {
   return <FontAwesomeIcon icon={faBone} />
+}
+
+export function IconSchool() {
+  return <FontAwesomeIcon icon={faPenRuler} />
+}
+
+export function IconOther() {
+  return <FontAwesomeIcon icon={faBox} />
 }
 
 export function IconChartColumn() {

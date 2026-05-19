@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { IconFood, IconCleanliness, IconApparel, IconPetCare } from '../components/FontAwesomeIcons'
+import { IconFood, IconCleanliness, IconApparel, IconPetCare, IconSchool, IconOther } from '../components/FontAwesomeIcons'
 import Toast from '../components/Toast'
 import ulbraLogo from '../assets/ulbra_logo.png'
 import { supabase } from '../lib/supabaseClient'
@@ -12,6 +12,8 @@ const CATEGORIAS = [
   { id: 'higiene', Icon: IconCleanliness, label: 'Higiene & Limpeza', unidade: 'unidades' },
   { id: 'vestuario', Icon: IconApparel, label: 'Vestuário', unidade: 'peças' },
   { id: 'pet', Icon: IconPetCare, label: 'Pet/Ração', unidade: 'kg' },
+  { id: 'escolar', Icon: IconSchool, label: 'Material Escolar', unidade: 'itens' },
+  { id: 'outros', Icon: IconOther, label: 'Outros', unidade: 'itens' },
 ]
 
 export default function CadastroPage() {

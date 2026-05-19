@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useMemo, Fragment } from 'react'
 import * as echarts from 'echarts'
 import ulbraLogo from '../assets/ulbra_logo.png'
-import { IconFood, IconCleanliness, IconApparel, IconPetCare, IconChartColumn, IconTrophy, IconRankingStar, IconClipboardList, IconBoxesStacked } from '../components/FontAwesomeIcons'
+import { IconFood, IconCleanliness, IconApparel, IconPetCare, IconChartColumn, IconTrophy, IconRankingStar, IconClipboardList, IconBoxesStacked, IconSchool, IconOther } from '../components/FontAwesomeIcons'
 import { supabase } from '../lib/supabaseClient'
 import { useCampaignSettings } from '../hooks/useCampaignSettings'
 import '../styles/dashboard.css'
@@ -70,6 +70,8 @@ const CATEGORIAS = {
   higiene: { Icon: IconCleanliness, label: 'Higiene & Limpeza', unidade: 'unidades', color: '#91baa3' },
   vestuario: { Icon: IconApparel, label: 'Vestuário', unidade: 'peças', color: '#a89e8b' },
   pet: { Icon: IconPetCare, label: 'Pet/Ração', unidade: 'kg', color: '#66563d' },
+  escolar: { Icon: IconSchool, label: 'Material Escolar', unidade: 'itens', color: '#6b9080' },
+  outros: { Icon: IconOther, label: 'Outros', unidade: 'itens', color: '#7a7a7a' },
 }
 
 // Helper: agrupar doações por semana
@@ -91,7 +93,7 @@ const groupByWeek = (doacoes) => {
     
     const weekKey = `Semana ${weekNum}`
     if (!byWeek[weekKey]) {
-      byWeek[weekKey] = { alimentos: 0, higiene: 0, vestuario: 0, pet: 0, total: 0 }
+      byWeek[weekKey] = { alimentos: 0, higiene: 0, vestuario: 0, pet: 0, escolar: 0, outros: 0, total: 0 }
     }
     byWeek[weekKey][d.categoria] += d.quantidade
     byWeek[weekKey].total += d.quantidade
@@ -372,6 +374,8 @@ export default function DashboardPage() {
             higiene: unidadeDoacoes.filter(d => d.categoria === 'higiene').reduce((s, d) => s + d.quantidade, 0),
             vestuario: unidadeDoacoes.filter(d => d.categoria === 'vestuario').reduce((s, d) => s + d.quantidade, 0),
             pet: unidadeDoacoes.filter(d => d.categoria === 'pet').reduce((s, d) => s + d.quantidade, 0),
+            escolar: unidadeDoacoes.filter(d => d.categoria === 'escolar').reduce((s, d) => s + d.quantidade, 0),
+            outros: unidadeDoacoes.filter(d => d.categoria === 'outros').reduce((s, d) => s + d.quantidade, 0),
           }
         })
 
@@ -449,6 +453,24 @@ export default function DashboardPage() {
               barMaxWidth: 60,
               z: 1,
             },
+            {
+              name: 'Material Escolar',
+              data: composicaoData.map(d => d.escolar),
+              type: 'bar',
+              stack: 'total',
+              itemStyle: { color: '#6b9080' },
+              barMaxWidth: 60,
+              z: 0,
+            },
+            {
+              name: 'Outros',
+              data: composicaoData.map(d => d.outros),
+              type: 'bar',
+              stack: 'total',
+              itemStyle: { color: '#7a7a7a' },
+              barMaxWidth: 60,
+              z: -1,
+            },
           ],
         }
 
@@ -475,6 +497,8 @@ export default function DashboardPage() {
           higiene: unidadeDoacoes.filter(d => d.categoria === 'higiene').reduce((s, d) => s + d.quantidade, 0),
           vestuario: unidadeDoacoes.filter(d => d.categoria === 'vestuario').reduce((s, d) => s + d.quantidade, 0),
           pet: unidadeDoacoes.filter(d => d.categoria === 'pet').reduce((s, d) => s + d.quantidade, 0),
+          escolar: unidadeDoacoes.filter(d => d.categoria === 'escolar').reduce((s, d) => s + d.quantidade, 0),
+          outros: unidadeDoacoes.filter(d => d.categoria === 'outros').reduce((s, d) => s + d.quantidade, 0),
         }
       })
 
@@ -496,6 +520,8 @@ export default function DashboardPage() {
               { nome: 'Vestuário', valor: unit.vestuario, cor: '#a89e8b' },
               { nome: 'Higiene & Limpeza', valor: unit.higiene, cor: '#91baa3' },
               { nome: 'Pet/Ração', valor: unit.pet, cor: '#66563d' },
+              { nome: 'Material Escolar', valor: unit.escolar, cor: '#6b9080' },
+              { nome: 'Outros', valor: unit.outros, cor: '#7a7a7a' },
             ].sort((a, b) => b.valor - a.valor)
 
             let tooltip = `${params[0].axisValue}<br/>Total: <strong>${unit.total}</strong><br/><br/>`
@@ -643,6 +669,30 @@ export default function DashboardPage() {
             areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               { offset: 0, color: 'rgba(102, 86, 61, 0.3)' },
               { offset: 1, color: 'rgba(102, 86, 61, 0.05)' },
+            ]) },
+          },
+          {
+            name: 'Material Escolar',
+            data: evolucaoArray.map(d => d.escolar),
+            type: 'line',
+            smooth: true,
+            lineStyle: { width: 3, color: '#6b9080' },
+            itemStyle: { color: '#6b9080' },
+            areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: 'rgba(107, 144, 128, 0.3)' },
+              { offset: 1, color: 'rgba(107, 144, 128, 0.05)' },
+            ]) },
+          },
+          {
+            name: 'Outros',
+            data: evolucaoArray.map(d => d.outros),
+            type: 'line',
+            smooth: true,
+            lineStyle: { width: 3, color: '#7a7a7a' },
+            itemStyle: { color: '#7a7a7a' },
+            areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: 'rgba(122, 122, 122, 0.3)' },
+              { offset: 1, color: 'rgba(122, 122, 122, 0.05)' },
             ]) },
           },
         ],
@@ -910,6 +960,8 @@ export default function DashboardPage() {
                       higiene: unidadeDoacoes.filter(d => d.categoria === 'higiene').reduce((s, d) => s + d.quantidade, 0),
                       vestuario: unidadeDoacoes.filter(d => d.categoria === 'vestuario').reduce((s, d) => s + d.quantidade, 0),
                       pet: unidadeDoacoes.filter(d => d.categoria === 'pet').reduce((s, d) => s + d.quantidade, 0),
+                      escolar: unidadeDoacoes.filter(d => d.categoria === 'escolar').reduce((s, d) => s + d.quantidade, 0),
+                      outros: unidadeDoacoes.filter(d => d.categoria === 'outros').reduce((s, d) => s + d.quantidade, 0),
                     }
 
                     return (
@@ -943,6 +995,8 @@ export default function DashboardPage() {
                                     { nome: 'Vestuário', valor: breakdown.vestuario, cor: '#a89e8b' },
                                     { nome: 'Higiene & Limpeza', valor: breakdown.higiene, cor: '#91baa3' },
                                     { nome: 'Pet/Ração', valor: breakdown.pet, cor: '#66563d' },
+                                    { nome: 'Material Escolar', valor: breakdown.escolar, cor: '#6b9080' },
+                                    { nome: 'Outros', valor: breakdown.outros, cor: '#7a7a7a' },
                                   ]
                                     .filter(item => item.valor > 0)
                                     .sort((a, b) => b.valor - a.valor)
