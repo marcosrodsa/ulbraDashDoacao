@@ -365,7 +365,8 @@ export default function DashboardPage() {
     try {
       // Gráfico 1: Composição por Unidade (Barras empilhadas)
       if (chartComposicaoInstance.current) {
-        const topUnidades = rankingArray.slice(0, 10)
+        const topLimit = window.innerWidth < 768 ? 5 : 10;
+        const topUnidades = rankingArray.slice(0, topLimit);
         const composicaoData = topUnidades.map(unit => {
           const unidadeDoacoes = doacoes.filter(d => d.unidade === unit.nome)
           return {
@@ -383,31 +384,52 @@ export default function DashboardPage() {
           backgroundColor: 'transparent',
           tooltip: {
             trigger: 'axis',
+            confine: true,
             backgroundColor: 'rgba(13, 54, 52, 0.95)',
             borderColor: 'rgba(245, 206, 153, 0.2)',
             textStyle: { color: '#faf7f2' },
             axisPointer: { type: 'shadow' },
+            formatter: function(params) {
+              if (!params || !params.length) return '';
+              let html = `<strong style="font-size: 13px;">${params[0].axisValue}</strong><br/>`;
+              let hasValue = false;
+              params.forEach(item => {
+                if (item.value > 0) {
+                  html += `<div style="display: flex; justify-content: space-between; gap: 16px; margin-top: 4px;"><span>${item.marker} ${item.seriesName}</span> <strong>${item.value}</strong></div>`;
+                  hasValue = true;
+                }
+              });
+              if (!hasValue) html += `<div style="margin-top: 4px; color: #aaa;">Sem doações</div>`;
+              return html;
+            }
           },
           legend: {
             bottom: 0,
             left: 'center',
-            textStyle: { color: '#f5ce99', fontSize: 12, fontWeight: 600 },
-            itemWidth: 16,
-            itemHeight: 16,
-            itemGap: 18,
+            textStyle: { color: '#f5ce99', fontSize: window.innerWidth < 768 ? 10 : 12, fontWeight: 600 },
+            itemWidth: window.innerWidth < 768 ? 12 : 16,
+            itemHeight: window.innerWidth < 768 ? 12 : 16,
+            itemGap: window.innerWidth < 768 ? 10 : 18,
             icon: 'rect',
           },
           grid: {
-            left: '100px',
-            right: '40px',
-            bottom: '150px',
+            left: window.innerWidth < 768 ? '40px' : '100px',
+            right: window.innerWidth < 768 ? '20px' : '40px',
+            bottom: window.innerWidth < 768 ? '130px' : '150px',
             top: '20px',
             containLabel: false,
           },
           xAxis: {
             type: 'category',
             data: composicaoData.map(d => d.nome.replace('ULBRA ', '')),
-            axisLabel: { color: '#c4b5a0', fontSize: 11, rotate: 45, interval: 0 },
+            axisLabel: { 
+              color: '#c4b5a0', 
+              fontSize: window.innerWidth < 768 ? 9 : 11, 
+              rotate: 45, 
+              interval: 0,
+              width: window.innerWidth < 768 ? 60 : 80,
+              overflow: 'truncate'
+            },
             axisLine: { lineStyle: { color: 'rgba(245, 206, 153, 0.15)' } },
           },
           yAxis: {
@@ -427,20 +449,20 @@ export default function DashboardPage() {
               z: 4,
             },
             {
-              name: 'Vestuário',
-              data: composicaoData.map(d => d.vestuario),
-              type: 'bar',
-              stack: 'total',
-              itemStyle: { color: '#a89e8b' },
-              barMaxWidth: 60,
-              z: 3,
-            },
-            {
               name: 'Higiene & Limpeza',
               data: composicaoData.map(d => d.higiene),
               type: 'bar',
               stack: 'total',
               itemStyle: { color: '#91baa3' },
+              barMaxWidth: 60,
+              z: 3,
+            },
+            {
+              name: 'Vestuário',
+              data: composicaoData.map(d => d.vestuario),
+              type: 'bar',
+              stack: 'total',
+              itemStyle: { color: '#a89e8b' },
               barMaxWidth: 60,
               z: 2,
             },
@@ -589,28 +611,43 @@ export default function DashboardPage() {
         backgroundColor: 'transparent',
         tooltip: {
           trigger: 'axis',
+          confine: true,
           backgroundColor: 'rgba(13, 54, 52, 0.95)',
           borderColor: 'rgba(245, 206, 153, 0.2)',
           textStyle: { color: '#faf7f2' },
+          formatter: function(params) {
+            if (!params || !params.length) return '';
+            let html = `<strong style="font-size: 13px;">${params[0].axisValue}</strong><br/>`;
+            let hasValue = false;
+            params.forEach(item => {
+              if (item.value > 0) {
+                html += `<div style="display: flex; justify-content: space-between; gap: 16px; margin-top: 4px;"><span>${item.marker} ${item.seriesName}</span> <strong>${item.value}</strong></div>`;
+                hasValue = true;
+              }
+            });
+            if (!hasValue) html += `<div style="margin-top: 4px; color: #aaa;">Nenhum registro</div>`;
+            return html;
+          }
         },
         legend: {
           bottom: 0,
           left: 'center',
-          textStyle: { color: '#f5ce99', fontSize: 12, fontWeight: 600 },
-          itemWidth: 16,
-          itemHeight: 16,
-          itemGap: 18,
+          textStyle: { color: '#f5ce99', fontSize: window.innerWidth < 768 ? 10 : 12, fontWeight: 600 },
+          itemWidth: window.innerWidth < 768 ? 12 : 16,
+          itemHeight: window.innerWidth < 768 ? 12 : 16,
+          itemGap: window.innerWidth < 768 ? 10 : 18,
           icon: 'rect',
         },
         grid: {
-          left: '60px',
-          right: '40px',
-          bottom: '110px',
+          left: window.innerWidth < 768 ? '40px' : '60px',
+          right: window.innerWidth < 768 ? '20px' : '40px',
+          bottom: window.innerWidth < 768 ? '100px' : '110px',
           top: '20px',
           containLabel: false,
         },
         xAxis: {
           type: 'category',
+          boundaryGap: false,
           data: evolucaoArray.map(d => d[xAxisLabel]),
           axisLabel: { color: '#c4b5a0', fontSize: 12 },
           axisLine: { lineStyle: { color: 'rgba(245, 206, 153, 0.15)' } },
@@ -1061,7 +1098,7 @@ export default function DashboardPage() {
           {/* Gráfico - Composição por Unidade (Top 8) */}
           <div className="chart-card chart-card-full">
             <div className="chart-header">
-              <h3><IconChartColumn /> Composição por Unidade (Top 10)</h3>
+              <h3><IconChartColumn /> Composição por Unidade (Top {window.innerWidth < 768 ? 5 : 10})</h3>
               <div className="chart-toggle">
                 <button
                   className={`toggle-btn ${filters.tipoUnidade === 'Todos' ? 'active' : ''}`}

@@ -8,7 +8,7 @@
 .dashboard-header {
   background: linear-gradient(135deg, rgba(13, 54, 52, 0.8) 0%, rgba(26, 86, 83, 0.8) 100%);
   border-bottom: 1px solid var(--surface-line);
-  padding: 60px 20px;
+  padding: calc(60px + env(safe-area-inset-top, 0px)) 20px 60px 20px;
   text-align: center;
 }
 
@@ -1308,43 +1308,41 @@ tr:hover {
     padding: 7px 12px;
     flex-shrink: 0;
   }
-
   .filter-row:last-child {
-    display: block !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    flex-direction: row !important;
     width: 100% !important;
-    text-align: center;
+    gap: 8px !important;
+    justify-content: center;
   }
 
   .filter-row:last-child .filter-label {
-    display: block !important;
     width: 100%;
     font-size: 11px;
     text-align: left;
-    margin: 0 0 12px 0;
+    margin: 0;
     color: var(--fg-muted);
   }
 
   .filter-row:last-child .filter-chips {
-    display: block !important;
     width: 100%;
-    margin: 0 0 12px 0;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 0 0 8px 0;
   }
 
   .filter-row:last-child .filter-chips button {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 6px;
+    margin: 0;
   }
 
   .filter-row:last-child .chip-reset,
   .filter-row:last-child .refresh-filter-btn {
-    display: inline-block !important;
-    vertical-align: middle !important;
-    height: 42px !important;
-    padding: 10px 16px !important;
-    font-size: 13px !important;
-    box-sizing: border-box !important;
-    margin: 0 6px;
+    margin: 0 4px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
   }
 
   .chip-reset {
