@@ -132,11 +132,12 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
   const [isRefreshing, setIsRefreshing] = useState(false)
 
-  // Estado calculado (não mais useState)
   const [totais, setTotais] = useState({})
   const [ranking, setRanking] = useState([])
   const [ultimasDoacoes, setUltimasDoacoes] = useState([])
   const [evolucaoData, setEvolucaoData] = useState([])
+  const [isIntroExpanded, setIsIntroExpanded] = useState(false)
+  const [isFiltersExpanded, setIsFiltersExpanded] = useState(false)
 
   const chartRankingRef = useRef(null)
   const chartRankingInstance = useRef(null)
@@ -763,16 +764,23 @@ export default function DashboardPage() {
       {/* Contexto */}
       <section className="contexto-section">
         <div className="container">
-          <div className="contexto-box">
+          <div className="contexto-box" onClick={() => setIsIntroExpanded(!isIntroExpanded)} style={{ cursor: 'pointer' }}>
             <p>
               O Maio Solidário 2026 é a campanha nacional de arrecadação da Rede Ulbra. Cada unidade é um ponto de coleta. Cada doação recebida é registrada, somada e entregue a quem ainda precisa.
             </p>
-            <p>
-              Este painel existe para monitorar, em tempo real, tudo o que está sendo arrecadado em todas as unidades do país. Aqui você acompanha o volume por categoria, o desempenho de cada unidade e o total da rede.
-            </p>
-            <p>
-              <strong>Cada quilo, cada peça, cada item registrado neste painel chega na mesa de uma família. É por isso que toda doação importa.</strong>
-            </p>
+            {isIntroExpanded ? (
+              <>
+                <p>
+                  Este painel existe para monitorar, em tempo real, tudo o que está sendo arrecadado em todas as unidades do país. Aqui você acompanha o volume por categoria, o desempenho de cada unidade e o total da rede.
+                </p>
+                <p>
+                  <strong>Cada quilo, cada peça, cada item registrado neste painel chega na mesa de uma família. É por isso que toda doação importa.</strong>
+                </p>
+                <button className="ler-mais-btn" onClick={(e) => { e.stopPropagation(); setIsIntroExpanded(false); }}>Mostrar menos</button>
+              </>
+            ) : (
+              <button className="ler-mais-btn" onClick={(e) => { e.stopPropagation(); setIsIntroExpanded(true); }}>Ler mais...</button>
+            )}
           </div>
         </div>
       </section>
@@ -780,7 +788,13 @@ export default function DashboardPage() {
       {/* Filter Bar */}
       <section className="filter-bar">
         <div className="container">
-          <div className="filter-row">
+          <div className="filter-mobile-toggle">
+            <button className="filter-toggle-btn" onClick={() => setIsFiltersExpanded(!isFiltersExpanded)}>
+              {isFiltersExpanded ? '✕ Ocultar Filtros' : '⚙️ Filtros Avançados'}
+            </button>
+          </div>
+          <div className={`filter-content ${isFiltersExpanded ? 'expanded' : ''}`}>
+            <div className="filter-row">
             <div className="filter-group">
               <label>Unidade:</label>
               <select
@@ -876,6 +890,7 @@ export default function DashboardPage() {
             >
               ↻
             </button>
+          </div>
           </div>
         </div>
       </section>
