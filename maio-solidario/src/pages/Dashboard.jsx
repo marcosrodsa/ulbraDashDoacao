@@ -1064,6 +1064,13 @@ export default function DashboardPage() {
                                       )
                                     })}
                                 </div>
+                                <div className="breakdown-total">
+                                  <span className="breakdown-total-label">Total da unidade</span>
+                                  <span className="breakdown-total-value">
+                                    {unit.total.toLocaleString('pt-BR')}
+                                    <span className="breakdown-total-registros"> · {unit.registros} doação{unit.registros !== 1 ? 's' : ''}</span>
+                                  </span>
+                                </div>
                               </div>
                             </td>
                           </tr>
