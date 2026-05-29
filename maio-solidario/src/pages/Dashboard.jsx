@@ -394,13 +394,20 @@ export default function DashboardPage() {
               if (!params || !params.length) return '';
               let html = `<strong style="font-size: 13px;">${params[0].axisValue}</strong><br/>`;
               let hasValue = false;
+              let total = 0;
               params.forEach(item => {
-                if (item.value > 0) {
+                const val = Number(item.value) || 0;
+                total += val;
+                if (val > 0) {
                   html += `<div style="display: flex; justify-content: space-between; gap: 16px; margin-top: 4px;"><span>${item.marker} ${item.seriesName}</span> <strong>${item.value}</strong></div>`;
                   hasValue = true;
                 }
               });
-              if (!hasValue) html += `<div style="margin-top: 4px; color: #aaa;">Sem doações</div>`;
+              if (!hasValue) {
+                html += `<div style="margin-top: 4px; color: #aaa;">Sem doações</div>`;
+              } else {
+                html += `<div style="display: flex; justify-content: space-between; gap: 16px; margin-top: 8px; padding-top: 6px; border-top: 1px solid rgba(245, 206, 153, 0.3);"><span style="color: #f5ce99; font-weight: 700;">Total</span> <strong style="color: #f5ce99;">${total.toLocaleString('pt-BR')}</strong></div>`;
+              }
               return html;
             }
           },
@@ -1063,6 +1070,13 @@ export default function DashboardPage() {
                                         </div>
                                       )
                                     })}
+                                </div>
+                                <div className="breakdown-total">
+                                  <span className="breakdown-total-label">Total da unidade</span>
+                                  <span className="breakdown-total-value">
+                                    {unit.total.toLocaleString('pt-BR')}
+                                    <span className="breakdown-total-registros"> · {unit.registros} doação{unit.registros !== 1 ? 's' : ''}</span>
+                                  </span>
                                 </div>
                               </div>
                             </td>

@@ -1,20 +1,12 @@
 import { useState, useEffect } from 'react'
-import { IconFood, IconCleanliness, IconApparel, IconPetCare, IconSchool, IconOther } from '../components/FontAwesomeIcons'
 import Toast from '../components/Toast'
 import ulbraLogo from '../assets/ulbra_logo.png'
 import { supabase } from '../lib/supabaseClient'
 import { useCampaignSettings } from '../hooks/useCampaignSettings'
+import { CATEGORIAS, SEMANAS } from '../lib/cadastroConstants'
+import ListaDoacoes from '../components/ListaDoacoes'
 import '../styles/cadastro.css'
 import '../styles/icons.css'
-
-const CATEGORIAS = [
-  { id: 'alimentos', Icon: IconFood, label: 'Alimentos', unidade: 'kg' },
-  { id: 'higiene', Icon: IconCleanliness, label: 'Higiene & Limpeza', unidade: 'unidades' },
-  { id: 'vestuario', Icon: IconApparel, label: 'Vestuário', unidade: 'peças' },
-  { id: 'pet', Icon: IconPetCare, label: 'Pet/Ração', unidade: 'kg' },
-  { id: 'escolar', Icon: IconSchool, label: 'Material Escolar', unidade: 'itens' },
-  { id: 'outros', Icon: IconOther, label: 'Outros', unidade: 'itens' },
-]
 
 export default function CadastroPage() {
   const [formData, setFormData] = useState({
@@ -28,6 +20,7 @@ export default function CadastroPage() {
   const [toastType, setToastType] = useState('')
   const [unidades, setUnidades] = useState([])
   const [loading, setLoading] = useState(false)
+  const [refreshKey, setRefreshKey] = useState(0)
 
   // Meta config states
   const { settings, loading: metaLoading, updateMeta } = useCampaignSettings()
@@ -149,6 +142,7 @@ export default function CadastroPage() {
         descricao: '',
         data: '2026-05-01',
       })
+      setRefreshKey(k => k + 1)
     } catch (error) {
       setToastMessage('Erro ao registrar doação: ' + error.message)
       setToastType('error')
@@ -238,10 +232,9 @@ export default function CadastroPage() {
                 onChange={handleChange}
                 required
               >
-                <option value="2026-05-01">Semana 1 (01/05 a 10/05)</option>
-                <option value="2026-05-11">Semana 2 (11/05 a 17/05)</option>
-                <option value="2026-05-18">Semana 3 (18/05 a 24/05)</option>
-                <option value="2026-05-25">Semana 4 (25/05 a 31/05)</option>
+                {SEMANAS.map(s => (
+                  <option key={s.value} value={s.value}>{s.label}</option>
+                ))}
               </select>
             </div>
 
@@ -263,6 +256,8 @@ export default function CadastroPage() {
             </button>
           </form>
         </div>
+
+        <ListaDoacoes unidades={unidades} refreshKey={refreshKey} />
 
         <div className="config-section">
           <h2>⚙️ Configurações da Campanha</h2>
