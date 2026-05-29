@@ -21,7 +21,22 @@ export function getCategoriaLabel(id) {
   return cat ? cat.label : id
 }
 
+// A semana da campanha é uma FAIXA de dias do mês (mesma regra do Dashboard
+// groupByWeek): 1-10 → S1, 11-17 → S2, 18-24 → S3, 25-31 → S4.
+// donation_date guarda a data real (qualquer dia de maio), não só a data inicial
+// da semana — por isso comparamos pela faixa, não por igualdade exata.
+export function getSemanaNumero(date) {
+  if (!date) return null
+  const day = parseInt(String(date).slice(8, 10), 10)
+  if (Number.isNaN(day)) return null
+  if (day <= 10) return 1
+  if (day <= 17) return 2
+  if (day <= 24) return 3
+  return 4
+}
+
 export function getSemanaLabel(date) {
-  const semana = SEMANAS.find(s => s.value === date)
-  return semana ? semana.label : date
+  const numero = getSemanaNumero(date)
+  if (!numero) return date
+  return SEMANAS[numero - 1].label
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '../lib/supabaseClient'
-import { CATEGORIAS, SEMANAS, getCategoriaLabel, getSemanaLabel } from '../lib/cadastroConstants'
+import { CATEGORIAS, SEMANAS, getCategoriaLabel, getSemanaLabel, getSemanaNumero } from '../lib/cadastroConstants'
 import Toast from './Toast'
 
 export default function ListaDoacoes({ unidades = [], refreshKey = 0 }) {
@@ -41,7 +41,7 @@ export default function ListaDoacoes({ unidades = [], refreshKey = 0 }) {
 
   const doacoesFiltradas = doacoes.filter(d =>
     (!filtroUnidade || d.unit_id === filtroUnidade) &&
-    (!filtroSemana || d.donation_date === filtroSemana)
+    (!filtroSemana || getSemanaNumero(d.donation_date) === getSemanaNumero(filtroSemana))
   )
 
   const startEdit = (d) => {

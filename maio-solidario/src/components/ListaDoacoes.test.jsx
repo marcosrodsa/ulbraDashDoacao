@@ -83,6 +83,30 @@ describe('ListaDoacoes', () => {
     expect(screen.getByRole('cell', { name: 'Campus B' })).toBeInTheDocument()
   })
 
+  // Bug: o filtro de semana usava igualdade exata com a data inicial da semana,
+  // então doações no meio da semana (ex. dia 05) sumiam ao filtrar por Semana 1.
+  // A semana deve ser tratada como FAIXA de dias (1-10 = Semana 1).
+  it('inclui doações no meio da semana ao filtrar (faixa, não data exata)', async () => {
+    const user = userEvent.setup()
+    const meioDaSemana = [
+      { id: 'm1', unit_id: 'u1', category: 'alimentos', quantity: 5, description: 'Meio S1', donation_date: '2026-05-05', created_at: '2026-05-05T08:00:00' },
+      { id: 'm2', unit_id: 'u2', category: 'pet', quantity: 3, description: 'Meio S3', donation_date: '2026-05-20', created_at: '2026-05-20T08:00:00' },
+    ]
+    mockSupabase({ selectData: meioDaSemana })
+    render(<ListaDoacoes unidades={UNIDADES} refreshKey={0} />)
+    await waitFor(() => expect(screen.getByRole('cell', { name: 'Meio S1' })).toBeInTheDocument())
+
+    // A doação do dia 05 deve aparecer rotulada como Semana 1
+    expect(screen.getByRole('cell', { name: 'Semana 1 (01/05 a 10/05)' })).toBeInTheDocument()
+
+    await user.selectOptions(screen.getByLabelText('Filtrar por semana'), '2026-05-01')
+
+    // Continua visível mesmo não sendo a data inicial exata da semana
+    expect(screen.getByRole('cell', { name: 'Meio S1' })).toBeInTheDocument()
+    // A do dia 20 (Semana 3) some
+    expect(screen.queryByRole('cell', { name: 'Meio S3' })).not.toBeInTheDocument()
+  })
+
   it('entra em modo edição e mostra os inputs', async () => {
     const user = userEvent.setup()
     mockSupabase({ selectData: DOACOES })
