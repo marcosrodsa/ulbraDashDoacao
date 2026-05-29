@@ -57,18 +57,27 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: 'jsdom',
-    globals: false,
+    globals: true,
     setupFiles: './src/test/setup.js',
   },
 })
 ```
+
+> Nota: `globals: true` é necessário para que (a) `import '@testing-library/jest-dom'` consiga estender o `expect` global e (b) o React Testing Library registre o cleanup automático entre testes (via `afterEach` global). Com `globals: false` os renders se acumulam entre `it` blocks e quebram consultas como `getByRole`.
 
 - [ ] **Step 4: Criar o arquivo de setup**
 
 Criar `src/test/setup.js`:
 
 ```js
+import { afterEach } from 'vitest'
+import { cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
+
+// Garante isolamento entre testes: desmonta o DOM renderizado após cada teste.
+afterEach(() => {
+  cleanup()
+})
 ```
 
 - [ ] **Step 5: Verificar que o runner roda os testes existentes**
