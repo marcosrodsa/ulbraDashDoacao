@@ -9,6 +9,8 @@ export default function ListaDoacoes({ unidades = [], refreshKey = 0 }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [filtroUnidade, setFiltroUnidade] = useState('')
   const [filtroSemana, setFiltroSemana] = useState('')
+  const [sortColumn, setSortColumn] = useState(null)
+  const [sortDir, setSortDir] = useState('asc')
   const [editingId, setEditingId] = useState(null)
   const [editData, setEditData] = useState({})
   const [toastMessage, setToastMessage] = useState('')
@@ -43,6 +45,36 @@ export default function ListaDoacoes({ unidades = [], refreshKey = 0 }) {
     (!filtroUnidade || d.unit_id === filtroUnidade) &&
     (!filtroSemana || getSemanaNumero(d.donation_date) === getSemanaNumero(filtroSemana))
   )
+
+  // Colunas ordenáveis (Ações fica de fora). sortKey extrai o valor de comparação.
+  const COLUNAS = [
+    { key: 'unidade', label: 'Unidade', sortKey: d => nomeUnidade(d.unit_id) },
+    { key: 'categoria', label: 'Categoria', sortKey: d => getCategoriaLabel(d.category) },
+    { key: 'quantity', label: 'Qtd', sortKey: d => Number(d.quantity) },
+    { key: 'semana', label: 'Semana', sortKey: d => getSemanaNumero(d.donation_date) ?? 0 },
+    { key: 'descricao', label: 'Descrição', sortKey: d => d.description || '' },
+  ]
+
+  const handleSort = (col) => {
+    if (sortColumn === col) {
+      setSortDir(prev => (prev === 'asc' ? 'desc' : 'asc'))
+    } else {
+      setSortColumn(col)
+      setSortDir('asc')
+    }
+  }
+
+  const colAtiva = COLUNAS.find(c => c.key === sortColumn)
+  const doacoesOrdenadas = colAtiva
+    ? [...doacoesFiltradas].sort((a, b) => {
+        const va = colAtiva.sortKey(a)
+        const vb = colAtiva.sortKey(b)
+        const cmp = (typeof va === 'number' && typeof vb === 'number')
+          ? va - vb
+          : String(va).localeCompare(String(vb), 'pt-BR')
+        return sortDir === 'asc' ? cmp : -cmp
+      })
+    : doacoesFiltradas
 
   const startEdit = (d) => {
     setEditingId(d.id)
@@ -145,16 +177,21 @@ export default function ListaDoacoes({ unidades = [], refreshKey = 0 }) {
           <table className="lista-tabela">
             <thead>
               <tr>
-                <th>Unidade</th>
-                <th>Categoria</th>
-                <th>Qtd</th>
-                <th>Semana</th>
-                <th>Descrição</th>
+                {COLUNAS.map(col => (
+                  <th
+                    key={col.key}
+                    aria-sort={sortColumn === col.key ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
+                  >
+                    <button type="button" className="lista-sort-btn" onClick={() => handleSort(col.key)}>
+                      {col.label}{sortColumn === col.key ? (sortDir === 'asc' ? ' ▲' : ' ▼') : ''}
+                    </button>
+                  </th>
+                ))}
                 <th>Ações</th>
               </tr>
             </thead>
             <tbody>
-              {doacoesFiltradas.map(d => editingId === d.id ? (
+              {doacoesOrdenadas.map(d => editingId === d.id ? (
                 <tr key={d.id} className="lista-row-editing">
                   <td data-label="Unidade">
                     <select name="unit_id" value={editData.unit_id} onChange={handleEditChange} aria-label="Editar unidade">

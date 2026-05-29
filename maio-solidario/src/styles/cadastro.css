@@ -524,6 +524,27 @@ select {
   letter-spacing: 0.04em;
 }
 
+/* Cabeçalho clicável para ordenar: o botão herda o visual do <th> */
+.lista-sort-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.lista-sort-btn:hover {
+  color: var(--ulbra-gold);
+}
+
 .lista-tabela input,
 .lista-tabela select {
   width: 100%;

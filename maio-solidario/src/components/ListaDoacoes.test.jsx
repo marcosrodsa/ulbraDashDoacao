@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import ListaDoacoes from './ListaDoacoes'
 import { supabase } from '../lib/supabaseClient'
@@ -105,6 +105,57 @@ describe('ListaDoacoes', () => {
     expect(screen.getByRole('cell', { name: 'Meio S1' })).toBeInTheDocument()
     // A do dia 20 (Semana 3) some
     expect(screen.queryByRole('cell', { name: 'Meio S3' })).not.toBeInTheDocument()
+  })
+
+  // Helper: devolve o texto da 1ª célula (Unidade) de cada linha de dados, na ordem do DOM.
+  function unidadesNaOrdem() {
+    const linhas = screen.getAllByRole('row').slice(1) // pula o cabeçalho
+    return linhas.map(r => within(r).getAllByRole('cell')[0].textContent)
+  }
+
+  it('ordena por quantidade (numérico) alternando asc/desc ao clicar em Qtd', async () => {
+    const user = userEvent.setup()
+    mockSupabase({ selectData: DOACOES }) // d1 qtd 50, d2 qtd 10
+    render(<ListaDoacoes unidades={UNIDADES} refreshKey={0} />)
+    await waitFor(() => expect(screen.getByRole('cell', { name: 'Unidade A' })).toBeInTheDocument())
+
+    // Ordem original (created_at desc, como veio do fetch): d1 (Unidade A) antes de d2 (Campus B)
+    expect(unidadesNaOrdem()).toEqual(['Unidade A', 'Campus B'])
+
+    // 1º clique: crescente por quantidade → d2 (10) antes de d1 (50)
+    await user.click(screen.getByRole('button', { name: /Qtd/ }))
+    expect(unidadesNaOrdem()).toEqual(['Campus B', 'Unidade A'])
+
+    // 2º clique: decrescente → d1 (50) antes de d2 (10)
+    await user.click(screen.getByRole('button', { name: /Qtd/ }))
+    expect(unidadesNaOrdem()).toEqual(['Unidade A', 'Campus B'])
+  })
+
+  it('ordena por unidade (texto) alfabeticamente ao clicar em Unidade', async () => {
+    const user = userEvent.setup()
+    mockSupabase({ selectData: DOACOES })
+    render(<ListaDoacoes unidades={UNIDADES} refreshKey={0} />)
+    await waitFor(() => expect(screen.getByRole('cell', { name: 'Unidade A' })).toBeInTheDocument())
+
+    // Crescente: "Campus B" < "Unidade A"
+    await user.click(screen.getByRole('button', { name: /Unidade/ }))
+    expect(unidadesNaOrdem()).toEqual(['Campus B', 'Unidade A'])
+
+    // Decrescente
+    await user.click(screen.getByRole('button', { name: /Unidade/ }))
+    expect(unidadesNaOrdem()).toEqual(['Unidade A', 'Campus B'])
+  })
+
+  it('mostra a seta indicadora apenas na coluna ativa', async () => {
+    const user = userEvent.setup()
+    mockSupabase({ selectData: DOACOES })
+    render(<ListaDoacoes unidades={UNIDADES} refreshKey={0} />)
+    await waitFor(() => expect(screen.getByRole('cell', { name: 'Unidade A' })).toBeInTheDocument())
+
+    await user.click(screen.getByRole('button', { name: /Qtd/ }))
+    expect(screen.getByRole('button', { name: /Qtd ▲/ })).toBeInTheDocument()
+    // outras colunas não têm seta
+    expect(screen.queryByRole('button', { name: /Unidade ▲|Unidade ▼/ })).not.toBeInTheDocument()
   })
 
   it('entra em modo edição e mostra os inputs', async () => {
