@@ -71,6 +71,18 @@ describe('ListaDoacoes', () => {
     expect(screen.getByRole('cell', { name: 'Campus B' })).toBeInTheDocument()
   })
 
+  it('filtra por categoria', async () => {
+    const user = userEvent.setup()
+    mockSupabase({ selectData: DOACOES }) // d1 alimentos, d2 higiene
+    render(<ListaDoacoes unidades={UNIDADES} refreshKey={0} />)
+    await waitFor(() => expect(screen.getByRole('cell', { name: 'Unidade A' })).toBeInTheDocument())
+
+    await user.selectOptions(screen.getByLabelText('Filtrar por categoria'), 'higiene')
+
+    expect(screen.queryByRole('cell', { name: 'Unidade A' })).not.toBeInTheDocument()
+    expect(screen.getByRole('cell', { name: 'Campus B' })).toBeInTheDocument()
+  })
+
   it('filtra por semana', async () => {
     const user = userEvent.setup()
     mockSupabase({ selectData: DOACOES })

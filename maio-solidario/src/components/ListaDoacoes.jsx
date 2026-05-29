@@ -9,6 +9,7 @@ export default function ListaDoacoes({ unidades = [], refreshKey = 0 }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [filtroUnidade, setFiltroUnidade] = useState('')
   const [filtroSemana, setFiltroSemana] = useState('')
+  const [filtroCategoria, setFiltroCategoria] = useState('')
   const [sortColumn, setSortColumn] = useState(null)
   const [sortDir, setSortDir] = useState('asc')
   const [editingId, setEditingId] = useState(null)
@@ -43,7 +44,8 @@ export default function ListaDoacoes({ unidades = [], refreshKey = 0 }) {
 
   const doacoesFiltradas = doacoes.filter(d =>
     (!filtroUnidade || d.unit_id === filtroUnidade) &&
-    (!filtroSemana || getSemanaNumero(d.donation_date) === getSemanaNumero(filtroSemana))
+    (!filtroSemana || getSemanaNumero(d.donation_date) === getSemanaNumero(filtroSemana)) &&
+    (!filtroCategoria || d.category === filtroCategoria)
   )
 
   // Colunas ordenáveis (Ações fica de fora). sortKey extrai o valor de comparação.
@@ -165,6 +167,16 @@ export default function ListaDoacoes({ unidades = [], refreshKey = 0 }) {
             <option value="">Todas as semanas</option>
             {SEMANAS.map(s => (
               <option key={s.value} value={s.value}>{s.label}</option>
+            ))}
+          </select>
+          <select
+            value={filtroCategoria}
+            onChange={e => setFiltroCategoria(e.target.value)}
+            aria-label="Filtrar por categoria"
+          >
+            <option value="">Todas as categorias</option>
+            {CATEGORIAS.map(c => (
+              <option key={c.id} value={c.id}>{c.label}</option>
             ))}
           </select>
         </div>
