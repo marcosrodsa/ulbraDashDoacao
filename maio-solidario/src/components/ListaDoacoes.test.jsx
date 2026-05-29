@@ -71,6 +71,26 @@ describe('ListaDoacoes', () => {
     expect(screen.getByRole('cell', { name: 'Campus B' })).toBeInTheDocument()
   })
 
+  it('mostra a linha de total com a soma das quantidades exibidas', async () => {
+    mockSupabase({ selectData: DOACOES }) // d1 qtd 50, d2 qtd 10
+    render(<ListaDoacoes unidades={UNIDADES} refreshKey={0} />)
+    await waitFor(() => expect(screen.getByRole('cell', { name: 'Unidade A' })).toBeInTheDocument())
+
+    expect(screen.getByRole('cell', { name: 'Total' })).toBeInTheDocument()
+    expect(screen.getByTestId('lista-total')).toHaveTextContent('60') // 50 + 10
+  })
+
+  it('o total acompanha o filtro aplicado', async () => {
+    const user = userEvent.setup()
+    mockSupabase({ selectData: DOACOES })
+    render(<ListaDoacoes unidades={UNIDADES} refreshKey={0} />)
+    await waitFor(() => expect(screen.getByTestId('lista-total')).toHaveTextContent('60'))
+
+    await user.selectOptions(screen.getByLabelText('Filtrar por categoria'), 'higiene') // só d2 (10)
+
+    expect(screen.getByTestId('lista-total')).toHaveTextContent('10')
+  })
+
   it('filtra por categoria', async () => {
     const user = userEvent.setup()
     mockSupabase({ selectData: DOACOES }) // d1 alimentos, d2 higiene
@@ -120,8 +140,10 @@ describe('ListaDoacoes', () => {
   })
 
   // Helper: devolve o texto da 1ª célula (Unidade) de cada linha de dados, na ordem do DOM.
+  // Escopa no tbody para ignorar o cabeçalho (thead) e a linha de total (tfoot).
   function unidadesNaOrdem() {
-    const linhas = screen.getAllByRole('row').slice(1) // pula o cabeçalho
+    const tbody = screen.getAllByRole('rowgroup')[1] // [thead, tbody, tfoot]
+    const linhas = within(tbody).getAllByRole('row')
     return linhas.map(r => within(r).getAllByRole('cell')[0].textContent)
   }
 

@@ -556,6 +556,21 @@ select {
   font-size: 13px;
 }
 
+.lista-total-row td {
+  border-top: 2px solid var(--ulbra-gold);
+  border-bottom: none;
+  font-weight: 700;
+  color: var(--ulbra-gold-light);
+  padding-top: 12px;
+}
+
+.lista-total-label {
+  text-align: right;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
 .lista-acoes {
   display: flex;
   gap: 6px;
@@ -636,5 +651,12 @@ select {
   .lista-tabela td select {
     width: auto;
     flex: 1;
+  }
+
+  /* Total: no card mobile a célula de valor já mostra "Total" via data-label,
+     então escondemos as células vazias e o rótulo separado. */
+  .lista-total-row td:empty,
+  .lista-total-label {
+    display: none;
   }
 }

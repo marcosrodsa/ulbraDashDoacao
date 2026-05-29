@@ -66,6 +66,10 @@ export default function ListaDoacoes({ unidades = [], refreshKey = 0 }) {
     }
   }
 
+  const totalQtd = Math.round(
+    doacoesFiltradas.reduce((soma, d) => soma + Number(d.quantity || 0), 0) * 100
+  ) / 100
+
   const colAtiva = COLUNAS.find(c => c.key === sortColumn)
   const doacoesOrdenadas = colAtiva
     ? [...doacoesFiltradas].sort((a, b) => {
@@ -251,6 +255,16 @@ export default function ListaDoacoes({ unidades = [], refreshKey = 0 }) {
                 </tr>
               ))}
             </tbody>
+            <tfoot>
+              <tr className="lista-total-row">
+                <td></td>
+                <td className="lista-total-label">Total</td>
+                <td data-label="Total" data-testid="lista-total">{totalQtd}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tfoot>
           </table>
         )}
       </div>
