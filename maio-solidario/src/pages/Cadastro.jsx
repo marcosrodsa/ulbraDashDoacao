@@ -4,6 +4,7 @@ import ulbraLogo from '../assets/ulbra_logo.png'
 import { supabase } from '../lib/supabaseClient'
 import { useCampaignSettings } from '../hooks/useCampaignSettings'
 import { CATEGORIAS, SEMANAS } from '../lib/cadastroConstants'
+import ListaDoacoes from '../components/ListaDoacoes'
 import '../styles/cadastro.css'
 import '../styles/icons.css'
 
@@ -19,6 +20,7 @@ export default function CadastroPage() {
   const [toastType, setToastType] = useState('')
   const [unidades, setUnidades] = useState([])
   const [loading, setLoading] = useState(false)
+  const [refreshKey, setRefreshKey] = useState(0)
 
   // Meta config states
   const { settings, loading: metaLoading, updateMeta } = useCampaignSettings()
@@ -140,6 +142,7 @@ export default function CadastroPage() {
         descricao: '',
         data: '2026-05-01',
       })
+      setRefreshKey(k => k + 1)
     } catch (error) {
       setToastMessage('Erro ao registrar doação: ' + error.message)
       setToastType('error')
@@ -253,6 +256,8 @@ export default function CadastroPage() {
             </button>
           </form>
         </div>
+
+        <ListaDoacoes unidades={unidades} refreshKey={refreshKey} />
 
         <div className="config-section">
           <h2>⚙️ Configurações da Campanha</h2>
