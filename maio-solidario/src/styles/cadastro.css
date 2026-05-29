@@ -435,3 +435,185 @@ select {
     width: 100%;
   }
 }
+
+/* ===== Lista de Doações (accordion) ===== */
+.lista-section {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--surface-line);
+}
+
+.lista-toggle-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(204, 162, 105, 0.12);
+  border: 1px solid var(--ulbra-gold);
+  color: var(--ulbra-gold-light);
+  font-size: 18px;
+  font-weight: 600;
+  padding: 16px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.lista-toggle-btn:hover {
+  background: rgba(204, 162, 105, 0.2);
+}
+
+.lista-chevron {
+  font-size: 14px;
+}
+
+.lista-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, margin-top 0.3s ease;
+}
+
+.lista-content.expanded {
+  max-height: 4000px;
+  margin-top: 20px;
+}
+
+.lista-filtros {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.lista-filtros select {
+  flex: 1;
+  min-width: 140px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--surface-line);
+  background: var(--ulbra-primary-deep);
+  color: var(--fg);
+}
+
+.lista-empty {
+  color: var(--fg-muted);
+  text-align: center;
+  padding: 24px 0;
+}
+
+.lista-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.lista-tabela th,
+.lista-tabela td {
+  padding: 10px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--surface-line);
+  color: var(--fg);
+  vertical-align: middle;
+}
+
+.lista-tabela th {
+  color: var(--ulbra-gold-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.lista-tabela input,
+.lista-tabela select {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--surface-line);
+  background: var(--ulbra-primary-deep);
+  color: var(--fg);
+  font-size: 13px;
+}
+
+.lista-acoes {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.lista-acoes button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.lista-btn-editar,
+.lista-btn-salvar {
+  background: var(--ulbra-gold);
+  color: var(--ulbra-primary-deep);
+}
+
+.lista-btn-cancelar {
+  background: transparent;
+  color: var(--fg-muted);
+  border: 1px solid var(--surface-line) !important;
+}
+
+.lista-btn-excluir {
+  background: rgba(200, 60, 60, 0.18);
+  color: #f0a0a0;
+  border: 1px solid rgba(200, 60, 60, 0.4) !important;
+}
+
+/* Mobile: tabela vira cards empilhados */
+@media (max-width: 600px) {
+  .lista-tabela,
+  .lista-tabela thead,
+  .lista-tabela tbody,
+  .lista-tabela tr,
+  .lista-tabela td {
+    display: block;
+    width: 100%;
+  }
+
+  .lista-tabela thead {
+    display: none;
+  }
+
+  .lista-tabela tr {
+    margin-bottom: 16px;
+    border: 1px solid var(--surface-line);
+    border-radius: 10px;
+    padding: 8px 12px;
+  }
+
+  .lista-tabela td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--surface-line);
+    padding: 8px 0;
+  }
+
+  .lista-tabela td:last-child {
+    border-bottom: none;
+  }
+
+  .lista-tabela td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--ulbra-gold-light);
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  .lista-tabela td input,
+  .lista-tabela td select {
+    width: auto;
+    flex: 1;
+  }
+}
