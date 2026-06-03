@@ -952,11 +952,25 @@ export default function DashboardPage() {
           <div className="alert-cta-section">
             <div className="alert-cta-card">
               <div className="alert-line">
-                <span className="alert-icon">⚠️</span>
-                <span className="alert-text">Apenas {Math.round((totalGeral / settings.meta_doacoes) * 100)}% da meta</span>
-                <span className="alert-sep">•</span>
-                <span className="alert-text">Faltam ~{Math.max(settings.meta_doacoes - totalGeral, 0).toLocaleString('pt-BR')}</span>
-                <span className="alert-sep">•</span>
+                {(() => {
+                  const pct = Math.round((totalGeral / settings.meta_doacoes) * 100)
+                  const metaBatida = totalGeral >= settings.meta_doacoes
+                  return (
+                    <>
+                      <span className="alert-icon">{metaBatida ? '🎉' : '⚠️'}</span>
+                      <span className="alert-text">
+                        {metaBatida ? `${pct}% da meta` : `Apenas ${pct}% da meta`}
+                      </span>
+                      <span className="alert-sep">•</span>
+                      <span className="alert-text">
+                        {metaBatida
+                          ? 'Meta atingida!'
+                          : `Faltam ~${(settings.meta_doacoes - totalGeral).toLocaleString('pt-BR')}`}
+                      </span>
+                      <span className="alert-sep">•</span>
+                    </>
+                  )
+                })()}
                 <span className="alert-text">
                   {(() => {
                     // Get current date in São Paulo timezone as YYYY-MM-DD
